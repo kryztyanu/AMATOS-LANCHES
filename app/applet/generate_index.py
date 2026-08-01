@@ -515,7 +515,6 @@ html_template = """<!DOCTYPE html>
 <div class="app-container">
     <header>
         <div class="brand-title">AMATOS LANCHES</div>
-        <img src="data:image/png;base64,%%LOGO_B64%%" alt="Amatos Mascot Logo" class="logo-img">
         <a href="tel:85986050960" class="delivery-banner">
             <span>📞 DELIVERY: 85 98605-0960</span>
         </a>

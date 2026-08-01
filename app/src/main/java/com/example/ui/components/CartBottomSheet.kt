@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.R
@@ -69,15 +70,15 @@ fun CartBottomSheet(
                 .padding(bottom = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Logo at top
-            Image(
-                painter = painterResource(id = R.drawable.amatos_logo),
-                contentDescription = "Amatos Lanches Logo",
-                modifier = Modifier
-                    .height(75.dp)
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-                contentScale = ContentScale.Fit
+            // Header title text
+            Text(
+                text = "AMATOS LANCHES",
+                color = RedPrimary,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.ExtraBold,
+                letterSpacing = 0.5.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(bottom = 8.dp)
             )
 
             // Header

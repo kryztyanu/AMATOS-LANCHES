@@ -1,5 +1,6 @@
 package com.example.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -13,9 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.data.model.OrderEntity
 import com.example.ui.theme.PriceRed
 import com.example.ui.theme.RedPrimary
@@ -34,11 +38,20 @@ fun OrderHistoryScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
+            text = "AMATOS LANCHES",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.ExtraBold,
+            color = RedPrimary,
+            letterSpacing = 0.5.sp,
+            modifier = Modifier.padding(bottom = 4.dp)
+        )
+        Text(
             text = "Histórico de Pedidos",
-            fontSize = 20.sp,
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFF1C1B1B),
             modifier = Modifier.padding(bottom = 12.dp)

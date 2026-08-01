@@ -46,26 +46,15 @@ fun AmatosHeader(
             .padding(top = 12.dp, bottom = 4.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // App Title
+        // App Title Text
         Text(
             text = "AMATOS LANCHES",
             color = RedPrimary,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.ExtraBold,
-            letterSpacing = 0.5.sp,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Black,
+            letterSpacing = 1.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = 6.dp)
-        )
-
-        // Mascot Logo from Google Drive
-        Image(
-            painter = painterResource(id = R.drawable.amatos_logo),
-            contentDescription = "Amatos Lanches Logo",
-            modifier = Modifier
-                .height(115.dp)
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 2.dp),
-            contentScale = ContentScale.Fit
+            modifier = Modifier.padding(vertical = 12.dp)
         )
 
         Spacer(modifier = Modifier.height(6.dp))
