@@ -1,5 +1,6 @@
 package com.example.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,10 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.R
 import com.example.data.model.MenuItem
 import com.example.ui.theme.PriceRed
 import com.example.ui.theme.RedPrimary
@@ -55,8 +59,20 @@ fun ItemDetailDialog(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp)
+                    .padding(20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // Logo at top
+                Image(
+                    painter = painterResource(id = R.drawable.amatos_logo),
+                    contentDescription = "Amatos Lanches Logo",
+                    modifier = Modifier
+                        .height(75.dp)
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
+                    contentScale = ContentScale.Fit
+                )
+
                 // Header with Close
                 Row(
                     modifier = Modifier.fillMaxWidth(),
