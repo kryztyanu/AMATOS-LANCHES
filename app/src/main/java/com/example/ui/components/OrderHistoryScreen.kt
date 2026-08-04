@@ -41,9 +41,17 @@ fun OrderHistoryScreen(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.amatos_logo),
+            contentDescription = "AMATOS LANCHES Logo",
+            modifier = Modifier
+                .height(64.dp)
+                .padding(bottom = 4.dp),
+            contentScale = ContentScale.Fit
+        )
         Text(
             text = "AMATOS LANCHES",
-            fontSize = 24.sp,
+            fontSize = 20.sp,
             fontWeight = FontWeight.ExtraBold,
             color = RedPrimary,
             letterSpacing = 0.5.sp,

@@ -70,11 +70,21 @@ fun CartBottomSheet(
                 .padding(bottom = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Header Logo Image
+            Image(
+                painter = painterResource(id = R.drawable.amatos_logo),
+                contentDescription = "AMATOS LANCHES Logo",
+                modifier = Modifier
+                    .height(64.dp)
+                    .padding(bottom = 4.dp),
+                contentScale = ContentScale.Fit
+            )
+
             // Header title text
             Text(
                 text = "AMATOS LANCHES",
                 color = RedPrimary,
-                fontSize = 22.sp,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
                 letterSpacing = 0.5.sp,
                 textAlign = TextAlign.Center,
