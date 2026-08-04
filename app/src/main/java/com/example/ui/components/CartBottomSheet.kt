@@ -322,100 +322,50 @@ fun CartBottomSheet(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Total Summary
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Total do Pedido:",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF1C1B1B)
-                        )
-                        Text(
-                            text = ptBrFormat.format(totalPrice),
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = PriceRed
-                        )
-                    }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Text(
-                        text = "+ TAXA DE ENTREGA: consulte valor da taxa",
-                        fontSize = 12.sp,
+                        text = "Total do Pedido:",
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = RedPrimary,
-                        modifier = Modifier.padding(top = 2.dp)
+                        color = Color(0xFF1C1B1B)
+                    )
+                    Text(
+                        text = ptBrFormat.format(totalPrice),
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = PriceRed
                     )
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                var showPrinterDialog by remember { mutableStateOf(false) }
-
-                if (showPrinterDialog) {
-                    BluetoothPrinterDialog(
-                        customerName = customerName,
-                        deliveryAddress = deliveryAddress,
-                        referencePoint = referencePoint,
-                        orderObservation = orderObservation,
-                        paymentMethod = paymentMethod,
-                        cartItems = cartItems,
-                        totalPrice = totalPrice,
-                        onDismiss = { showPrinterDialog = false }
-                    )
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                // Submit Button via WhatsApp
+                Button(
+                    onClick = onSendOrder,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(52.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = RedPrimary,
+                        contentColor = Color.White
+                    ),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-                    OutlinedButton(
-                        onClick = { showPrinterDialog = true },
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(52.dp),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = RedPrimary),
-                        border = androidx.compose.foundation.BorderStroke(1.5.dp, RedPrimary)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Print,
-                            contentDescription = "Imprimir",
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = "Imprimir",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-
-                    Button(
-                        onClick = onSendOrder,
-                        modifier = Modifier
-                            .weight(2.2f)
-                            .height(52.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = RedPrimary,
-                            contentColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Send,
-                            contentDescription = "Enviar Pedido",
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = "Enviar WhatsApp",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
+                    Icon(
+                        imageVector = Icons.Default.Send,
+                        contentDescription = "Enviar Pedido",
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Enviar Pedido via WhatsApp",
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             }
         }

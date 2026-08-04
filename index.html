@@ -508,19 +508,11 @@
                 <span>Total:</span>
                 <span id="cartModalTotal" style="color: var(--red-dark);">R$ 0,00</span>
             </div>
-            <div style="font-weight: 700; font-size: 13px; color: var(--red-main); margin-top: 4px; margin-bottom: 12px;">
-                + TAXA DE ENTREGA: consulte valor da taxa
-            </div>
         </div>
 
-        <div style="display: flex; gap: 8px; margin-top: 12px;">
-            <button class="btn-secondary" style="flex: 1; border: 2px solid var(--red-main); color: var(--red-dark); background: white; border-radius: 10px; font-weight: 800; padding: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;" onclick="printOrderReceipt()">
-                <span>🖨️ IMPRIMIR</span>
-            </button>
-            <button class="btn-whatsapp" style="flex: 2; margin-top: 0;" onclick="sendWhatsAppOrder()">
-                <span>💬 ENVIAR WHATSAPP</span>
-            </button>
-        </div>
+        <button class="btn-whatsapp" onclick="sendWhatsAppOrder()">
+            <span>💬 ENVIAR PEDIDO NO WHATSAPP</span>
+        </button>
     </div>
 </div>
 
@@ -767,7 +759,7 @@
         localStorage.setItem('amatos_address', address);
         localStorage.setItem('amatos_ref', reference);
 
-        let msg = `*NOVO PEDIDO:*
+        let msg = `*NOVO PEDIDO - AMATOS LANCHES*
 `;
         msg += `----------------------------------
 `;
@@ -792,7 +784,7 @@
 
         cart.forEach(item => {
             let sub = item.price ? `(R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')})` : '';
-            msg += `• ${item.quantity} *${item.name}* ${item.selectedOption ? `(${item.selectedOption})` : ''} ${sub}
+            msg += `• ${item.quantity}x *${item.name}* ${item.selectedOption ? `(${item.selectedOption})` : ''} ${sub}
 `;
             if (item.observation) {
                 msg += `   _Obs: ${item.observation}_
@@ -804,8 +796,6 @@
         msg += `----------------------------------
 `;
         msg += `*TOTAL DO PEDIDO:* R$ ${totalPrice.toFixed(2).replace('.', ',')}
-`;
-        msg += `+ TAXA DE ENTREGA: consulte valor da taxa
 `;
         msg += `----------------------------------
 `;
@@ -821,70 +811,6 @@
         closeModal('cartModal');
 
         window.open(url, '_blank');
-    }
-
-    function printOrderReceipt() {
-        if (cart.length === 0) {
-            alert('Seu carrinho está vazio!');
-            return;
-        }
-        const name = document.getElementById('custName').value.trim() || 'Cliente';
-        const address = document.getElementById('custAddress').value.trim() || 'Retirada no Balcão';
-        const reference = document.getElementById('custRef').value.trim();
-        const orderObs = document.getElementById('custOrderObs').value.trim();
-        let payment = document.getElementById('custPayment').value;
-        const troco = document.getElementById('custTroco').value.trim();
-        if (payment === 'Dinheiro' && troco) {
-            payment += ` (Troco para ${troco})`;
-        }
-        const totalPrice = cart.reduce((acc, c) => acc + (c.price * c.quantity), 0);
-
-        let itemsText = cart.map(item => {
-            let sub = item.price ? `R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}` : '';
-            return `${item.quantity} ${item.name} ${item.selectedOption ? `(${item.selectedOption})` : ''} - ${sub}${item.observation ? `
-   Obs: ${item.observation}` : ''}`;
-        }).join('
-');
-
-        let printWindow = window.open('', '_blank', 'width=400,height=600');
-        if (!printWindow) {
-            window.print();
-            return;
-        }
-        printWindow.document.write(`
-            <html>
-            <head>
-                <title>Imprimir Pedido</title>
-                <style>
-                    body { font-family: monospace; font-size: 13px; padding: 15px; margin: 0; }
-                    .center { text-align: center; }
-                    .bold { font-weight: bold; }
-                    .line { border-bottom: 1px dashed #000; margin: 10px 0; }
-                </style>
-            </head>
-            <body>
-                <div class="center bold" style="font-size: 16px;">NOVO PEDIDO:</div>
-                <div class="line"></div>
-                <div><b>Cliente:</b> ${name}</div>
-                <div><b>Endereço:</b> ${address}</div>
-                ${reference ? `<div><b>Ref:</b> ${reference}</div>` : ''}
-                ${orderObs ? `<div><b>Obs:</b> ${orderObs}</div>` : ''}
-                <div><b>Pagamento:</b> ${payment}</div>
-                <div class="line"></div>
-                <div class="bold">ITENS DO PEDIDO:</div><br/>
-                <pre style="font-family: monospace; white-space: pre-wrap;">${itemsText}</pre>
-                <div class="line"></div>
-                <div class="bold" style="font-size: 14px;">TOTAL DO PEDIDO: R$ ${totalPrice.toFixed(2).replace('.', ',')}</div>
-                <div class="bold" style="color: #c00; font-size: 12px; margin-top: 4px;">+ TAXA DE ENTREGA: consulte valor da taxa</div>
-                <div class="line"></div>
-                <div class="center">Obrigado pelo pedido!</div>
-                <script>
-                    window.onload = function() { window.print(); };
-                </script>
-            </body>
-            </html>
-        `);
-        printWindow.document.close();
     }
 
     function saveOrderToHistory(name, address, total, items) {
