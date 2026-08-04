@@ -618,6 +618,9 @@ html_template = """<!DOCTYPE html>
                 <span>Total:</span>
                 <span id="cartModalTotal" style="color: var(--red-dark);">R$ 0,00</span>
             </div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--red-main); margin-top: 4px; margin-bottom: 12px;">
+                + TAXA DE ENTREGA: consulte valor da taxa
+            </div>
         </div>
 
         <button class="btn-whatsapp" onclick="sendWhatsAppOrder()">
@@ -869,7 +872,7 @@ html_template = """<!DOCTYPE html>
         localStorage.setItem('amatos_address', address);
         localStorage.setItem('amatos_ref', reference);
 
-        let msg = `*NOVO PEDIDO - AMATOS LANCHES*\n`;
+        let msg = `*NOVO PEDIDO:*\n`;
         msg += `----------------------------------\n`;
         msg += `*Cliente:* ${name}\n`;
         msg += `*Endereço para Entrega:* ${address}\n`;
@@ -885,7 +888,7 @@ html_template = """<!DOCTYPE html>
 
         cart.forEach(item => {
             let sub = item.price ? `(R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')})` : '';
-            msg += `• ${item.quantity}x *${item.name}* ${item.selectedOption ? `(${item.selectedOption})` : ''} ${sub}\n`;
+            msg += `• ${item.quantity} *${item.name}* ${item.selectedOption ? `(${item.selectedOption})` : ''} ${sub}\n`;
             if (item.observation) {
                 msg += `   _Obs: ${item.observation}_\n`;
             }
@@ -894,6 +897,7 @@ html_template = """<!DOCTYPE html>
         const totalPrice = cart.reduce((acc, c) => acc + (c.price * c.quantity), 0);
         msg += `----------------------------------\n`;
         msg += `*TOTAL DO PEDIDO:* R$ ${totalPrice.toFixed(2).replace('.', ',')}\n`;
+        msg += `+ TAXA DE ENTREGA: consulte valor da taxa\n`;
         msg += `----------------------------------\n`;
         msg += `Aguardando confirmação! Obrigado!`;
 

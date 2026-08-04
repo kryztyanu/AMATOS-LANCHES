@@ -149,7 +149,7 @@ class MenuViewModel(private val repository: MenuRepository) : ViewModel() {
         val formattedTotal = ptBrFormat.format(total)
 
         val sb = StringBuilder()
-        sb.append("*🍔 PEDIDO - AMATOS LANCHES 🍔*\n")
+        sb.append("*NOVO PEDIDO:*\n")
         sb.append("----------------------------------\n")
         sb.append("*Cliente:* $name\n")
         sb.append("*Endereço para Entrega:* $address\n")
@@ -165,7 +165,7 @@ class MenuViewModel(private val repository: MenuRepository) : ViewModel() {
 
         currentCart.forEachIndexed { index, item ->
             val itemTotal = ptBrFormat.format(item.price * item.quantity)
-            sb.append("${index + 1}. *${item.quantity}x ${item.name}* (${item.priceText})\n")
+            sb.append("${index + 1}. *${item.quantity} ${item.name}* (${item.priceText})\n")
             if (item.selectedOption.isNotBlank()) {
                 sb.append("   └ Opção: ${item.selectedOption}\n")
             }
@@ -177,10 +177,11 @@ class MenuViewModel(private val repository: MenuRepository) : ViewModel() {
 
         sb.append("----------------------------------\n")
         sb.append("*TOTAL DO PEDIDO:* $formattedTotal\n")
+        sb.append("+ TAXA DE ENTREGA: consulte valor da taxa\n")
         sb.append("----------------------------------\n")
         sb.append("Obrigado pelo pedido! Aguardo confirmação. 🙏")
 
-        val summary = currentCart.joinToString { "${it.quantity}x ${it.name}" }
+        val summary = currentCart.joinToString { "${it.quantity} ${it.name}" }
 
         // Save order locally in Room
         viewModelScope.launch {

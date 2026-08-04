@@ -322,22 +322,33 @@ fun CartBottomSheet(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Total Summary
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    modifier = Modifier.fillMaxWidth()
                 ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Total do Pedido:",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF1C1B1B)
+                        )
+                        Text(
+                            text = ptBrFormat.format(totalPrice),
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = PriceRed
+                        )
+                    }
                     Text(
-                        text = "Total do Pedido:",
-                        fontSize = 16.sp,
+                        text = "+ TAXA DE ENTREGA: consulte valor da taxa",
+                        fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF1C1B1B)
-                    )
-                    Text(
-                        text = ptBrFormat.format(totalPrice),
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = PriceRed
+                        color = RedPrimary,
+                        modifier = Modifier.padding(top = 2.dp)
                     )
                 }
 
