@@ -51,20 +51,9 @@ fun AmatosHeader(
             painter = painterResource(id = R.drawable.amatos_logo),
             contentDescription = "AMATOS LANCHES Logo",
             modifier = Modifier
-                .height(90.dp)
-                .padding(top = 4.dp, bottom = 4.dp),
+                .height(100.dp)
+                .padding(vertical = 4.dp),
             contentScale = ContentScale.Fit
-        )
-
-        // App Title Text
-        Text(
-            text = "AMATOS LANCHES",
-            color = RedPrimary,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Black,
-            letterSpacing = 1.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = 6.dp)
         )
 
         Spacer(modifier = Modifier.height(6.dp))

@@ -75,20 +75,9 @@ fun CartBottomSheet(
                 painter = painterResource(id = R.drawable.amatos_logo),
                 contentDescription = "AMATOS LANCHES Logo",
                 modifier = Modifier
-                    .height(64.dp)
-                    .padding(bottom = 4.dp),
+                    .height(75.dp)
+                    .padding(bottom = 8.dp),
                 contentScale = ContentScale.Fit
-            )
-
-            // Header title text
-            Text(
-                text = "AMATOS LANCHES",
-                color = RedPrimary,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.ExtraBold,
-                letterSpacing = 0.5.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 8.dp)
             )
 
             // Header

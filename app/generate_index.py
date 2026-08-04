@@ -515,9 +515,8 @@ html_template = """<!DOCTYPE html>
 <div class="app-container">
     <header>
         <div style="text-align: center; margin-bottom: 8px;">
-            <img src="https://i.ibb.co/4Zt4bZq5/MIOLO-LOGOMARCA.png" alt="AMATOS LANCHES" style="max-height: 80px; width: auto; object-fit: contain;">
+            <img src="https://i.ibb.co/4Zt4bZq5/MIOLO-LOGOMARCA.png" alt="AMATOS LANCHES" style="max-height: 90px; width: auto; object-fit: contain;">
         </div>
-        <div class="brand-title">AMATOS LANCHES</div>
         <a href="tel:85986050960" class="delivery-banner">
             <span>📞 DELIVERY: 85 98605-0960</span>
         </a>

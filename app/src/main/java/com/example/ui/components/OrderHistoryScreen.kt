@@ -45,17 +45,9 @@ fun OrderHistoryScreen(
             painter = painterResource(id = R.drawable.amatos_logo),
             contentDescription = "AMATOS LANCHES Logo",
             modifier = Modifier
-                .height(64.dp)
-                .padding(bottom = 4.dp),
+                .height(75.dp)
+                .padding(bottom = 8.dp),
             contentScale = ContentScale.Fit
-        )
-        Text(
-            text = "AMATOS LANCHES",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.ExtraBold,
-            color = RedPrimary,
-            letterSpacing = 0.5.sp,
-            modifier = Modifier.padding(bottom = 4.dp)
         )
         Text(
             text = "Histórico de Pedidos",
