@@ -54,40 +54,40 @@ fun MacarraoDetailDialog(
     // Options Data
     val massas = remember {
         listOf(
-            OptionItem("parafuso", "Parafuso", "https://i.ibb.co/dwQmtPPW/image.png"),
-            OptionItem("penne", "Penne", "https://i.ibb.co/N6RK7X0K/image.png"),
-            OptionItem("talharim", "Talharim", "https://i.ibb.co/V8NxNdW/image.png"),
-            OptionItem("spaghetti", "Spaghetti", "https://i.ibb.co/PZmn35VJ/image.png")
+            OptionItem("parafuso", "Parafuso", "https://images.unsplash.com/photo-1551462147-37885acc36f1?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("penne", "Penne", "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("talharim", "Talharim", "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("spaghetti", "Spaghetti", "https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&w=300&q=80")
         )
     }
 
     val ingredientes = remember {
         listOf(
-            OptionItem("camarao", "Camarão", "https://i.ibb.co/ycMNTvrh/image.png", 5.0, "+ R$ 5,00"),
-            OptionItem("carne_moida", "Carne Moída", "https://i.ibb.co/GfZXJ6TQ/image.png"),
-            OptionItem("atum", "Atum", "https://i.ibb.co/Xk7g1kZJ/image.png"),
-            OptionItem("bacon", "Bacon", "https://i.ibb.co/LzHhWShM/image.png"),
-            OptionItem("calabresa", "Calabresa", "https://i.ibb.co/nWnSp5q/image.png"),
-            OptionItem("presunto", "Presunto", "https://i.ibb.co/5hWgd7PW/image.png"),
-            OptionItem("queijo", "Queijo Mussarella", "https://i.ibb.co/5X6jLGyr/image.png")
+            OptionItem("camarao", "Camarão", "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=300&q=80", 5.0, "+ R$ 5,00"),
+            OptionItem("carne_moida", "Carne Moída", "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("atum", "Atum", "https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("bacon", "Bacon", "https://images.unsplash.com/photo-1528607929212-2636ec44253e?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("calabresa", "Calabresa", "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("presunto", "Presunto", "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("queijo", "Queijo Mussarella", "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=300&q=80")
         )
     }
 
     val temperos = remember {
         listOf(
-            OptionItem("tomate", "Tomate", "https://i.ibb.co/zTTsWzn5/image.png"),
-            OptionItem("cebola", "Cebola", "https://i.ibb.co/4ZKkQq3b/CEBOLA.png"),
-            OptionItem("salsa", "Salsa", "https://i.ibb.co/r2YCS5BJ/image.png"),
-            OptionItem("pimentao", "Pimentão", "https://i.ibb.co/DDVYn2J7/image.png"),
-            OptionItem("coentro", "Coentro", "https://i.ibb.co/QFS7J7xy/image.png"),
-            OptionItem("cebolinha", "Cebolinha", "https://i.ibb.co/FkHNffdR/image.png"),
-            OptionItem("alho", "Alho", "https://i.ibb.co/7JY7DHSG/ALHO.png"),
-            OptionItem("passas", "Passas", "https://i.ibb.co/NddmmMP6/PASSAS.png"),
-            OptionItem("azeitona", "Azeitona", "https://i.ibb.co/FbRBqNjT/AZEITONA.png"),
-            OptionItem("ervilha", "Ervilha", "https://i.ibb.co/5hGr0HMQ/ERVILHA.png"),
-            OptionItem("milho", "Milho", "https://i.ibb.co/DHKh3CKK/image.png"),
-            OptionItem("oregano", "Orégano", "https://i.ibb.co/PztpDgLn/image.png"),
-            OptionItem("pimenta", "Pimenta Calabresa", "https://i.ibb.co/FkPswr8t/image.png")
+            OptionItem("tomate", "Tomate", "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("cebola", "Cebola", "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("salsa", "Salsa", "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("pimentao", "Pimentão", "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("coentro", "Coentro", "https://images.unsplash.com/photo-1588879460618-9249e7d947d1?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("cebolinha", "Cebolinha", "https://images.unsplash.com/photo-1592394533824-9440e5d68530?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("alho", "Alho", "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("passas", "Passas", "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("azeitona", "Azeitona", "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("ervilha", "Ervilha", "https://images.unsplash.com/photo-1587735243615-c03f25aaff15?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("milho", "Milho", "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("oregano", "Orégano", "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=300&q=80"),
+            OptionItem("pimenta", "Pimenta Calabresa", "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=300&q=80")
         )
     }
 
