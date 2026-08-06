@@ -19,6 +19,9 @@ import androidx.compose.ui.unit.sp
 import com.example.ui.MenuTab
 import com.example.ui.theme.RedPrimary
 
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
+
 @Composable
 fun CategoryTabs(
     selectedTab: MenuTab,
@@ -28,12 +31,14 @@ fun CategoryTabs(
     val tabs = listOf(
         MenuTab.SANDUICHES to "SANDUÍCHES",
         MenuTab.PASTEIS to "PASTÉIS",
-        MenuTab.PETISCOS to "PETISCOS"
+        MenuTab.PETISCOS to "PETISCOS",
+        MenuTab.MACARRAO to "MACARRÃO AO VIVO"
     )
 
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .horizontalScroll(rememberScrollState())
             .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -51,7 +56,6 @@ fun CategoryTabs(
 
             Box(
                 modifier = Modifier
-                    .weight(1f)
                     .height(42.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(bgColor)
@@ -60,7 +64,8 @@ fun CategoryTabs(
                         color = if (isSelected) RedPrimary else Color(0xFFE6BDBB),
                         shape = RoundedCornerShape(8.dp)
                     )
-                    .clickable { onTabSelected(tab) },
+                    .clickable { onTabSelected(tab) }
+                    .padding(horizontal = 14.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(

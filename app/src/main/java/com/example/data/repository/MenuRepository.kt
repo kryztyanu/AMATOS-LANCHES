@@ -65,8 +65,20 @@ class MenuRepository(
     }
 
     fun getAllMenuItems(): List<MenuItem> {
-        return sanduiches + pasteis + petiscos
+        return sanduiches + pasteis + petiscos + macarrao
     }
+
+    val macarrao = listOf(
+        MenuItem(
+            id = "macarrao_1",
+            name = "Macarrão Ao Vivo",
+            category = "MACARRÃO AO VIVO",
+            description = "Monte o seu macarrão ao vivo escolhendo tipo de massa, ingredientes, temperos e molho!",
+            price = 30.0,
+            priceText = "A partir de R$ 30,00",
+            isPopular = true
+        )
+    )
 
     // --- FULL MENU LIST FROM AMATOS LANCHES ---
 

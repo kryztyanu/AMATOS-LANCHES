@@ -20,7 +20,8 @@ import java.util.Locale
 enum class MenuTab {
     SANDUICHES,
     PASTEIS,
-    PETISCOS
+    PETISCOS,
+    MACARRAO
 }
 
 data class MenuUiState(
@@ -224,6 +225,7 @@ class MenuViewModel(private val repository: MenuRepository) : ViewModel() {
             MenuTab.SANDUICHES -> repository.sanduiches
             MenuTab.PASTEIS -> repository.pasteis
             MenuTab.PETISCOS -> repository.petiscos
+            MenuTab.MACARRAO -> repository.macarrao
         }
     }
 }

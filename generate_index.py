@@ -105,7 +105,11 @@ snacks = [
     {"id": "pet_12", "name": "Batata Frita com Bacon e Cheddar", "category": "PETISCOS", "description": "(coberta com molho cheddar e cubos de bacon)", "price": 35.0, "priceText": "R$ 35,00", "isPopular": True}
 ]
 
-all_items = sandwiches + pastels + snacks
+macarrao = [
+    {"id": "macarrao_1", "name": "Macarrão Ao Vivo", "category": "MACARRÃO AO VIVO", "description": "Monte o seu macarrão ao vivo escolhendo tipo de massa, ingredientes, temperos e molho!", "price": 30.0, "priceText": "A partir de R$ 30,00", "isPopular": True}
+]
+
+all_items = sandwiches + pastels + snacks + macarrao
 items_json = json.dumps(all_items, ensure_ascii=False)
 
 html_template = """<!DOCTYPE html>
@@ -525,10 +529,11 @@ html_template = """<!DOCTYPE html>
             <input type="text" id="searchInput" class="search-input" placeholder="🔍 Pesquisar lanches, pastéis..." oninput="filterMenu()">
         </div>
 
-        <div class="nav-tabs">
+        <div class="nav-tabs" style="overflow-x: auto; white-space: nowrap;">
             <button class="tab-btn active" onclick="switchCategory('SANDUÍCHES', this)">SANDUÍCHES</button>
             <button class="tab-btn" onclick="switchCategory('PASTÉIS', this)">PASTÉIS</button>
             <button class="tab-btn" onclick="switchCategory('PETISCOS', this)">PETISCOS</button>
+            <button class="tab-btn" onclick="switchCategory('MACARRÃO AO VIVO', this)">MACARRÃO AO VIVO</button>
         </div>
     </header>
 
@@ -566,6 +571,63 @@ html_template = """<!DOCTYPE html>
         </div>
 
         <button class="add-btn" style="width: 100%; padding: 12px; font-size: 14px; margin-top: 10px;" onclick="confirmAddItem()">ADICIONAR À SACOLA</button>
+    </div>
+</div>
+
+<!-- Macarrao Custom Modal -->
+<div class="modal-overlay" id="macarraoModal">
+    <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+        <div class="modal-header">
+            <div>
+                <h3 style="font-size: 18px; font-weight: 800;">MACARRÃO AO VIVO</h3>
+                <span style="font-size: 13px; font-weight: 700; color: var(--red-primary);">A partir de R$ 30,00</span>
+            </div>
+            <button class="close-btn" onclick="closeModal('macarraoModal')">&times;</button>
+        </div>
+
+        <!-- Section 1: MASSA -->
+        <div style="margin-bottom: 16px;">
+            <div style="font-weight: 800; font-size: 14px; color: var(--red-dark);">ESCOLHA O TIPO DA MASSA:</div>
+            <div style="font-size: 11px; color: #777; margin-bottom: 6px;">(Escolha apenas 1 opção)</div>
+            <div id="massaList"></div>
+        </div>
+
+        <!-- Section 2: INGREDIENTES -->
+        <div style="margin-bottom: 16px;">
+            <div style="font-weight: 800; font-size: 14px; color: var(--red-dark);">ESCOLHA OS INGREDIENTES:</div>
+            <div style="font-size: 11px; color: #777; margin-bottom: 6px;">(Escolha várias opções)</div>
+            <div id="ingredientesList"></div>
+        </div>
+
+        <!-- Section 3: TEMPEROS -->
+        <div style="margin-bottom: 16px;">
+            <div style="font-weight: 800; font-size: 14px; color: var(--red-dark);">ESCOLHA OS TEMPEROS:</div>
+            <div style="font-size: 11px; color: #777; margin-bottom: 6px;">(Escolha várias opções)</div>
+            <div id="temperosList"></div>
+        </div>
+
+        <!-- Section 4: MOLHOS -->
+        <div style="margin-bottom: 16px;">
+            <div style="font-weight: 800; font-size: 14px; color: var(--red-dark);">ESCOLHA OS MOLHOS:</div>
+            <div style="font-size: 11px; color: #777; margin-bottom: 6px;">(Escolha apenas 1 opção)</div>
+            <div id="molhosList"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Observações para a cozinha:</label>
+            <input type="text" id="macarraoObs" class="form-input" placeholder="Ex: caprichar no molho...">
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px; border: 1px solid #DDD; border-radius: 20px; padding: 2px 8px;">
+                <button class="qty-btn" onclick="changeMacarraoQty(-1)">-</button>
+                <span id="macarraoQtyText" style="font-weight: 800; font-size: 15px;">1</span>
+                <button class="qty-btn" onclick="changeMacarraoQty(1)">+</button>
+            </div>
+            <button class="add-btn" style="padding: 12px 20px; font-size: 14px;" onclick="confirmAddMacarrao()">
+                <span id="macarraoBtnText">ADICIONAR • R$ 30,00</span>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -714,9 +776,194 @@ html_template = """<!DOCTYPE html>
         renderMenu();
     }
 
+    let macarraoMassa = 'Parafuso';
+    let macarraoIngredientes = [];
+    let macarraoTemperos = [];
+    let macarraoMolho = 'Branco';
+    let macarraoQty = 1;
+
+    const massasData = [
+        { name: 'Parafuso', img: 'https://images.unsplash.com/photo-1551462147-37885acc36f1?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Penne', img: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281270?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Talharim', img: 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Spaghetti', img: 'https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&w=300&q=80' }
+    ];
+
+    const ingredientesData = [
+        { name: 'Camarão', extra: '+ R$ 5,00', price: 5, img: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Carne Moída', extra: '', price: 0, img: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Atum', extra: '', price: 0, img: 'https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Bacon', extra: '', price: 0, img: 'https://images.unsplash.com/photo-1528607929212-2636ec44253e?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Calabresa', extra: '', price: 0, img: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Presunto', extra: '', price: 0, img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Queijo Mussarella', extra: '', price: 0, img: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=300&q=80' }
+    ];
+
+    const temperosData = [
+        { name: 'Tomate', img: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Cebola', img: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cf?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Salsa', img: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Pimentão', img: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Coentro', img: 'https://images.unsplash.com/photo-1608683282713-99558238ed8a?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Cebolinha', img: 'https://images.unsplash.com/photo-1588865198282-f1d9675e648f?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Alho', img: 'https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Passas', img: 'https://images.unsplash.com/photo-1595412140818-2895f54f7626?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Azeitona', img: 'https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Ervilha', img: 'https://images.unsplash.com/photo-1587735243615-c03f25aaff15?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Milho', img: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Orégano', img: 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Pimenta Calabresa', img: 'https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=300&q=80' }
+    ];
+
+    const molhosData = [
+        { name: 'Branco', img: 'https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Vermelho', img: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281270?auto=format&fit=crop&w=300&q=80' },
+        { name: 'Ambos', img: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=300&q=80' }
+    ];
+
+    function openMacarraoModal() {
+        macarraoMassa = 'Parafuso';
+        macarraoIngredientes = [];
+        macarraoTemperos = [];
+        macarraoMolho = 'Branco';
+        macarraoQty = 1;
+        document.getElementById('macarraoObs').value = '';
+        renderMacarraoModal();
+        document.getElementById('macarraoModal').classList.add('active');
+    }
+
+    function renderMacarraoModal() {
+        // Massas
+        const mList = document.getElementById('massaList');
+        mList.innerHTML = '';
+        massasData.forEach(m => {
+            const isSel = (macarraoMassa === m.name);
+            const div = document.createElement('div');
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 8px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isSel ? 'var(--red-primary)' : '#EEE'}; background: ${isSel ? '#FFF0F0' : '#FFF'};`;
+            div.onclick = () => { macarraoMassa = m.name; renderMacarraoModal(); };
+            div.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="${m.img}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">
+                    <span style="font-weight: 700; font-size: 13px;">${m.name}</span>
+                </div>
+                <input type="radio" name="massa_opt" ${isSel ? 'checked' : ''}>
+            `;
+            mList.appendChild(div);
+        });
+
+        // Ingredientes
+        const iList = document.getElementById('ingredientesList');
+        iList.innerHTML = '';
+        ingredientesData.forEach(ing => {
+            const isChecked = macarraoIngredientes.includes(ing.name);
+            const div = document.createElement('div');
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 8px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isChecked ? 'var(--red-primary)' : '#EEE'}; background: ${isChecked ? '#FFF0F0' : '#FFF'};`;
+            div.onclick = () => {
+                if (isChecked) macarraoIngredientes = macarraoIngredientes.filter(x => x !== ing.name);
+                else macarraoIngredientes.push(ing.name);
+                renderMacarraoModal();
+            };
+            div.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="${ing.img}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">
+                    <div>
+                        <div style="font-weight: 700; font-size: 13px;">${ing.name}</div>
+                        ${ing.extra ? `<div style="font-size: 11px; color: var(--red-primary); font-weight: 800;">${ing.extra}</div>` : ''}
+                    </div>
+                </div>
+                <input type="checkbox" ${isChecked ? 'checked' : ''}>
+            `;
+            iList.appendChild(div);
+        });
+
+        // Temperos
+        const tList = document.getElementById('temperosList');
+        tList.innerHTML = '';
+        temperosData.forEach(t => {
+            const isChecked = macarraoTemperos.includes(t.name);
+            const div = document.createElement('div');
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 8px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isChecked ? 'var(--red-primary)' : '#EEE'}; background: ${isChecked ? '#FFF0F0' : '#FFF'};`;
+            div.onclick = () => {
+                if (isChecked) macarraoTemperos = macarraoTemperos.filter(x => x !== t.name);
+                else macarraoTemperos.push(t.name);
+                renderMacarraoModal();
+            };
+            div.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="${t.img}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">
+                    <span style="font-weight: 700; font-size: 13px;">${t.name}</span>
+                </div>
+                <input type="checkbox" ${isChecked ? 'checked' : ''}>
+            `;
+            tList.appendChild(div);
+        });
+
+        // Molhos
+        const molList = document.getElementById('molhosList');
+        molList.innerHTML = '';
+        molhosData.forEach(mol => {
+            const isSel = (macarraoMolho === mol.name);
+            const div = document.createElement('div');
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 8px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isSel ? 'var(--red-primary)' : '#EEE'}; background: ${isSel ? '#FFF0F0' : '#FFF'};`;
+            div.onclick = () => { macarraoMolho = mol.name; renderMacarraoModal(); };
+            div.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="${mol.img}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">
+                    <span style="font-weight: 700; font-size: 13px;">${mol.name}</span>
+                </div>
+                <input type="radio" name="molho_opt" ${isSel ? 'checked' : ''}>
+            `;
+            molList.appendChild(div);
+        });
+
+        const hasCamarao = macarraoIngredientes.includes('Camarão');
+        const unitPrice = 30.0 + (hasCamarao ? 5.0 : 0.0);
+        const totalPrice = unitPrice * macarraoQty;
+
+        document.getElementById('macarraoQtyText').innerText = macarraoQty;
+        document.getElementById('macarraoBtnText').innerText = `ADICIONAR • R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+    }
+
+    function changeMacarraoQty(delta) {
+        macarraoQty = Math.max(1, macarraoQty + delta);
+        renderMacarraoModal();
+    }
+
+    function confirmAddMacarrao() {
+        const item = menuData.find(i => i.id === 'macarrao_1') || { id: 'macarrao_1', name: 'Macarrão Ao Vivo' };
+        const hasCamarao = macarraoIngredientes.includes('Camarão');
+        const unitPrice = 30.0 + (hasCamarao ? 5.0 : 0.0);
+
+        const formattedIngs = macarraoIngredientes.length > 0 ?
+            macarraoIngredientes.map(i => i === 'Camarão' ? 'Camarão (+R$ 5,00)' : i).join(', ') : 'Nenhum';
+        const formattedTemps = macarraoTemperos.length > 0 ? macarraoTemperos.join(', ') : 'Nenhum';
+
+        const details = `Massa: ${macarraoMassa} | Ingredientes: ${formattedIngs} | Temperos: ${formattedTemps} | Molho: ${macarraoMolho}`;
+        const obs = document.getElementById('macarraoObs').value.trim();
+
+        for (let q = 0; q < macarraoQty; q++) {
+            cart.push({
+                id: 'macarrao_' + Date.now() + '_' + q,
+                name: 'Macarrão Ao Vivo',
+                price: unitPrice,
+                priceText: `R$ ${unitPrice.toFixed(2).replace('.', ',')}`,
+                selectedOption: details,
+                observation: obs,
+                quantity: 1
+            });
+        }
+        saveCart();
+        closeModal('macarraoModal');
+    }
+
     function openItemModal(id) {
         const item = menuData.find(i => i.id === id);
         if (!item) return;
+
+        if (id === 'macarrao_1' || item.category === 'MACARRÃO AO VIVO') {
+            openMacarraoModal();
+            return;
+        }
 
         if (!item.options || item.options.length === 0) {
             addToCart(item, '', '');
