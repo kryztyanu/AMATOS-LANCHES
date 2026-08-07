@@ -54,10 +54,10 @@ fun MacarraoDetailDialog(
     // Options Data
     val massas = remember {
         listOf(
-            OptionItem("parafuso", "Parafuso"),
-            OptionItem("penne", "Penne"),
-            OptionItem("talharim", "Talharim"),
-            OptionItem("spaghetti", "Spaghetti")
+            OptionItem("parafuso", "Parafuso", "https://i.ibb.co/dwQmtPPW/image.png"),
+            OptionItem("penne", "Penne", "https://i.ibb.co/N6RK7X0K/image.png"),
+            OptionItem("talharim", "Talharim", "https://i.ibb.co/V8NxNdW/image.png"),
+            OptionItem("spaghetti", "Spaghetti", "https://i.ibb.co/PZmn35VJ/image.png")
         )
     }
 
@@ -210,9 +210,20 @@ fun MacarraoDetailDialog(
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .clickable { selectedMassa = itemOption.name }
-                                .padding(12.dp),
+                                .padding(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
+                            if (itemOption.imageUrl.isNotEmpty()) {
+                                AsyncImage(
+                                    model = itemOption.imageUrl,
+                                    contentDescription = itemOption.name,
+                                    modifier = Modifier
+                                        .size(46.dp)
+                                        .clip(RoundedCornerShape(8.dp)),
+                                    contentScale = ContentScale.Crop
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                            }
                             Text(
                                 text = itemOption.name,
                                 fontSize = 14.sp,

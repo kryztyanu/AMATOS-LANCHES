@@ -783,10 +783,10 @@ html_template = """<!DOCTYPE html>
     let macarraoQty = 1;
 
     const massasData = [
-        { name: 'Parafuso' },
-        { name: 'Penne' },
-        { name: 'Talharim' },
-        { name: 'Spaghetti' }
+        { name: 'Parafuso', img: 'https://i.ibb.co/dwQmtPPW/image.png' },
+        { name: 'Penne', img: 'https://i.ibb.co/N6RK7X0K/image.png' },
+        { name: 'Talharim', img: 'https://i.ibb.co/V8NxNdW/image.png' },
+        { name: 'Spaghetti', img: 'https://i.ibb.co/PZmn35VJ/image.png' }
     ];
 
     const ingredientesData = [
@@ -843,6 +843,7 @@ html_template = """<!DOCTYPE html>
             div.onclick = () => { macarraoMassa = m.name; renderMacarraoModal(); };
             div.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
+                    ${m.img ? `<img src="${m.img}" referrerpolicy="no-referrer" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">` : ''}
                     <span style="font-weight: 700; font-size: 13px;">${m.name}</span>
                 </div>
                 <input type="radio" name="massa_opt" ${isSel ? 'checked' : ''}>
