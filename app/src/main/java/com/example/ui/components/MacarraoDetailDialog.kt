@@ -37,7 +37,7 @@ import java.util.Locale
 data class OptionItem(
     val id: String,
     val name: String,
-    val imageUrl: String,
+    val imageUrl: String = "",
     val extraPrice: Double = 0.0,
     val extraText: String = ""
 )
@@ -54,48 +54,48 @@ fun MacarraoDetailDialog(
     // Options Data
     val massas = remember {
         listOf(
-            OptionItem("parafuso", "Parafuso", "https://i.ibb.co/dwQmtPPW/image.png"),
-            OptionItem("penne", "Penne", "https://i.ibb.co/N6RK7X0K/image.png"),
-            OptionItem("talharim", "Talharim", "https://i.ibb.co/V8NxNdW/image.png"),
-            OptionItem("spaghetti", "Spaghetti", "https://i.ibb.co/PZmn35VJ/image.png")
+            OptionItem("parafuso", "Parafuso"),
+            OptionItem("penne", "Penne"),
+            OptionItem("talharim", "Talharim"),
+            OptionItem("spaghetti", "Spaghetti")
         )
     }
 
     val ingredientes = remember {
         listOf(
-            OptionItem("camarao", "Camarão", "https://i.ibb.co/ycMNTvrh/image.png", 5.0, "+ R$ 5,00"),
-            OptionItem("carne_moida", "Carne Moída", "https://i.ibb.co/GfZXJ6TQ/image.png"),
-            OptionItem("atum", "Atum", "https://i.ibb.co/Xk7g1kZJ/image.png"),
-            OptionItem("bacon", "Bacon", "https://i.ibb.co/LzHhWShM/image.png"),
-            OptionItem("calabresa", "Calabresa", "https://i.ibb.co/nWnSp5q/image.png"),
-            OptionItem("presunto", "Presunto", "https://i.ibb.co/5hWgd7PW/image.png"),
-            OptionItem("queijo", "Queijo Mussarella", "https://i.ibb.co/5X6jLGyr/image.png")
+            OptionItem("camarao", "Camarão", extraPrice = 5.0, extraText = "+ R$ 5,00"),
+            OptionItem("carne_moida", "Carne Moída"),
+            OptionItem("atum", "Atum"),
+            OptionItem("bacon", "Bacon"),
+            OptionItem("calabresa", "Calabresa"),
+            OptionItem("presunto", "Presunto"),
+            OptionItem("queijo", "Queijo Mussarella")
         )
     }
 
     val temperos = remember {
         listOf(
-            OptionItem("tomate", "Tomate", "https://i.ibb.co/zTTsWzn5/image.png"),
-            OptionItem("cebola", "Cebola", "https://i.ibb.co/4ZKkQq3b/CEBOLA.png"),
-            OptionItem("salsa", "Salsa", "https://i.ibb.co/r2YCS5BJ/image.png"),
-            OptionItem("pimentao", "Pimentão", "https://i.ibb.co/DDVYn2J7/image.png"),
-            OptionItem("coentro", "Coentro", "https://i.ibb.co/QFS7J7xy/image.png"),
-            OptionItem("cebolinha", "Cebolinha", "https://i.ibb.co/FkHNffdR/image.png"),
-            OptionItem("alho", "Alho", "https://i.ibb.co/7JY7DHSG/ALHO.png"),
-            OptionItem("passas", "Passas", "https://i.ibb.co/NddmmMP6/PASSAS.png"),
-            OptionItem("azeitona", "Azeitona", "https://i.ibb.co/FbRBqNjT/AZEITONA.png"),
-            OptionItem("ervilha", "Ervilha", "https://i.ibb.co/5hGr0HMQ/ERVILHA.png"),
-            OptionItem("milho", "Milho", "https://i.ibb.co/DHKh3CKK/image.png"),
-            OptionItem("oregano", "Orégano", "https://i.ibb.co/PztpDgLn/image.png"),
-            OptionItem("pimenta", "Pimenta Calabresa", "https://i.ibb.co/FkPswr8t/image.png")
+            OptionItem("tomate", "Tomate"),
+            OptionItem("cebola", "Cebola"),
+            OptionItem("salsa", "Salsa"),
+            OptionItem("pimentao", "Pimentão"),
+            OptionItem("coentro", "Coentro"),
+            OptionItem("cebolinha", "Cebolinha"),
+            OptionItem("alho", "Alho"),
+            OptionItem("passas", "Passas"),
+            OptionItem("azeitona", "Azeitona"),
+            OptionItem("ervilha", "Ervilha"),
+            OptionItem("milho", "Milho"),
+            OptionItem("oregano", "Orégano"),
+            OptionItem("pimenta", "Pimenta Calabresa")
         )
     }
 
     val molhos = remember {
         listOf(
-            OptionItem("branco", "Branco", "https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=300&q=80"),
-            OptionItem("vermelho", "Vermelho", "https://images.unsplash.com/photo-1621996346565-e3d5d6281270?auto=format&fit=crop&w=300&q=80"),
-            OptionItem("ambos", "Ambos", "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=300&q=80")
+            OptionItem("branco", "Branco"),
+            OptionItem("vermelho", "Vermelho"),
+            OptionItem("ambos", "Ambos")
         )
     }
 
@@ -210,18 +210,9 @@ fun MacarraoDetailDialog(
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .clickable { selectedMassa = itemOption.name }
-                                .padding(8.dp),
+                                .padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            AsyncImage(
-                                model = itemOption.imageUrl,
-                                contentDescription = itemOption.name,
-                                modifier = Modifier
-                                    .size(46.dp)
-                                    .clip(RoundedCornerShape(8.dp)),
-                                contentScale = ContentScale.Crop
-                            )
-                            Spacer(modifier = Modifier.width(10.dp))
                             Text(
                                 text = itemOption.name,
                                 fontSize = 14.sp,
@@ -267,18 +258,9 @@ fun MacarraoDetailDialog(
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .clickable { selectedIngredientes[itemOption.name] = !isChecked }
-                                .padding(8.dp),
+                                .padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            AsyncImage(
-                                model = itemOption.imageUrl,
-                                contentDescription = itemOption.name,
-                                modifier = Modifier
-                                    .size(46.dp)
-                                    .clip(RoundedCornerShape(8.dp)),
-                                contentScale = ContentScale.Crop
-                            )
-                            Spacer(modifier = Modifier.width(10.dp))
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = itemOption.name,
@@ -333,18 +315,9 @@ fun MacarraoDetailDialog(
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .clickable { selectedTemperos[itemOption.name] = !isChecked }
-                                .padding(8.dp),
+                                .padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            AsyncImage(
-                                model = itemOption.imageUrl,
-                                contentDescription = itemOption.name,
-                                modifier = Modifier
-                                    .size(46.dp)
-                                    .clip(RoundedCornerShape(8.dp)),
-                                contentScale = ContentScale.Crop
-                            )
-                            Spacer(modifier = Modifier.width(10.dp))
                             Text(
                                 text = itemOption.name,
                                 fontSize = 14.sp,
@@ -390,18 +363,9 @@ fun MacarraoDetailDialog(
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .clickable { selectedMolho = itemOption.name }
-                                .padding(8.dp),
+                                .padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            AsyncImage(
-                                model = itemOption.imageUrl,
-                                contentDescription = itemOption.name,
-                                modifier = Modifier
-                                    .size(46.dp)
-                                    .clip(RoundedCornerShape(8.dp)),
-                                contentScale = ContentScale.Crop
-                            )
-                            Spacer(modifier = Modifier.width(10.dp))
                             Text(
                                 text = itemOption.name,
                                 fontSize = 14.sp,

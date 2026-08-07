@@ -839,11 +839,10 @@ html_template = """<!DOCTYPE html>
         massasData.forEach(m => {
             const isSel = (macarraoMassa === m.name);
             const div = document.createElement('div');
-            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 8px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isSel ? 'var(--red-primary)' : '#EEE'}; background: ${isSel ? '#FFF0F0' : '#FFF'};`;
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 10px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isSel ? 'var(--red-primary)' : '#EEE'}; background: ${isSel ? '#FFF0F0' : '#FFF'};`;
             div.onclick = () => { macarraoMassa = m.name; renderMacarraoModal(); };
             div.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <img src="${m.img}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">
                     <span style="font-weight: 700; font-size: 13px;">${m.name}</span>
                 </div>
                 <input type="radio" name="massa_opt" ${isSel ? 'checked' : ''}>
@@ -857,7 +856,7 @@ html_template = """<!DOCTYPE html>
         ingredientesData.forEach(ing => {
             const isChecked = macarraoIngredientes.includes(ing.name);
             const div = document.createElement('div');
-            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 8px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isChecked ? 'var(--red-primary)' : '#EEE'}; background: ${isChecked ? '#FFF0F0' : '#FFF'};`;
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 10px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isChecked ? 'var(--red-primary)' : '#EEE'}; background: ${isChecked ? '#FFF0F0' : '#FFF'};`;
             div.onclick = () => {
                 if (isChecked) macarraoIngredientes = macarraoIngredientes.filter(x => x !== ing.name);
                 else macarraoIngredientes.push(ing.name);
@@ -865,7 +864,6 @@ html_template = """<!DOCTYPE html>
             };
             div.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <img src="${ing.img}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">
                     <div>
                         <div style="font-weight: 700; font-size: 13px;">${ing.name}</div>
                         ${ing.extra ? `<div style="font-size: 11px; color: var(--red-primary); font-weight: 800;">${ing.extra}</div>` : ''}
@@ -882,7 +880,7 @@ html_template = """<!DOCTYPE html>
         temperosData.forEach(t => {
             const isChecked = macarraoTemperos.includes(t.name);
             const div = document.createElement('div');
-            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 8px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isChecked ? 'var(--red-primary)' : '#EEE'}; background: ${isChecked ? '#FFF0F0' : '#FFF'};`;
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 10px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isChecked ? 'var(--red-primary)' : '#EEE'}; background: ${isChecked ? '#FFF0F0' : '#FFF'};`;
             div.onclick = () => {
                 if (isChecked) macarraoTemperos = macarraoTemperos.filter(x => x !== t.name);
                 else macarraoTemperos.push(t.name);
@@ -890,7 +888,6 @@ html_template = """<!DOCTYPE html>
             };
             div.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <img src="${t.img}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">
                     <span style="font-weight: 700; font-size: 13px;">${t.name}</span>
                 </div>
                 <input type="checkbox" ${isChecked ? 'checked' : ''}>
@@ -904,11 +901,10 @@ html_template = """<!DOCTYPE html>
         molhosData.forEach(mol => {
             const isSel = (macarraoMolho === mol.name);
             const div = document.createElement('div');
-            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 8px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isSel ? 'var(--red-primary)' : '#EEE'}; background: ${isSel ? '#FFF0F0' : '#FFF'};`;
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 10px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isSel ? 'var(--red-primary)' : '#EEE'}; background: ${isSel ? '#FFF0F0' : '#FFF'};`;
             div.onclick = () => { macarraoMolho = mol.name; renderMacarraoModal(); };
             div.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <img src="${mol.img}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">
                     <span style="font-weight: 700; font-size: 13px;">${mol.name}</span>
                 </div>
                 <input type="radio" name="molho_opt" ${isSel ? 'checked' : ''}>
