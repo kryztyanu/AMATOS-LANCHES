@@ -63,13 +63,13 @@ fun MacarraoDetailDialog(
 
     val ingredientes = remember {
         listOf(
-            OptionItem("camarao", "Camarão", extraPrice = 5.0, extraText = "+ R$ 5,00"),
-            OptionItem("carne_moida", "Carne Moída"),
-            OptionItem("atum", "Atum"),
-            OptionItem("bacon", "Bacon"),
-            OptionItem("calabresa", "Calabresa"),
-            OptionItem("presunto", "Presunto"),
-            OptionItem("queijo", "Queijo Mussarella")
+            OptionItem("camarao", "Camarão", "https://i.ibb.co/4q2QD3T/camarao.png", extraPrice = 5.0, extraText = "+ R$ 5,00"),
+            OptionItem("carne_moida", "Carne Moída", "https://i.ibb.co/6crfb1Dn/carne-moida.png"),
+            OptionItem("atum", "Atum", "https://i.ibb.co/gHPhbjQ/atum.png"),
+            OptionItem("bacon", "Bacon", "https://i.ibb.co/WwVnbM7/BACON.png"),
+            OptionItem("calabresa", "Calabresa", "https://i.ibb.co/FL8JKgK0/calabresa.png"),
+            OptionItem("presunto", "Presunto", "https://i.ibb.co/4RXrXtL1/presunto.png"),
+            OptionItem("queijo", "Queijo Mussarella", "https://i.ibb.co/hJXLy3bF/queijo.png")
         )
     }
 
@@ -269,9 +269,20 @@ fun MacarraoDetailDialog(
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .clickable { selectedIngredientes[itemOption.name] = !isChecked }
-                                .padding(12.dp),
+                                .padding(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
+                            if (itemOption.imageUrl.isNotEmpty()) {
+                                AsyncImage(
+                                    model = itemOption.imageUrl,
+                                    contentDescription = itemOption.name,
+                                    modifier = Modifier
+                                        .size(46.dp)
+                                        .clip(RoundedCornerShape(8.dp)),
+                                    contentScale = ContentScale.Crop
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                            }
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = itemOption.name,

@@ -676,13 +676,13 @@
     ];
 
     const ingredientesData = [
-        { name: 'Camarão', extra: '+ R$ 5,00', price: 5 },
-        { name: 'Carne Moída', extra: '', price: 0 },
-        { name: 'Atum', extra: '', price: 0 },
-        { name: 'Bacon', extra: '', price: 0 },
-        { name: 'Calabresa', extra: '', price: 0 },
-        { name: 'Presunto', extra: '', price: 0 },
-        { name: 'Queijo Mussarella', extra: '', price: 0 }
+        { name: 'Camarão', extra: '+ R$ 5,00', price: 5, img: 'https://i.ibb.co/4q2QD3T/camarao.png' },
+        { name: 'Carne Moída', extra: '', price: 0, img: 'https://i.ibb.co/6crfb1Dn/carne-moida.png' },
+        { name: 'Atum', extra: '', price: 0, img: 'https://i.ibb.co/gHPhbjQ/atum.png' },
+        { name: 'Bacon', extra: '', price: 0, img: 'https://i.ibb.co/WwVnbM7/BACON.png' },
+        { name: 'Calabresa', extra: '', price: 0, img: 'https://i.ibb.co/FL8JKgK0/calabresa.png' },
+        { name: 'Presunto', extra: '', price: 0, img: 'https://i.ibb.co/4RXrXtL1/presunto.png' },
+        { name: 'Queijo Mussarella', extra: '', price: 0, img: 'https://i.ibb.co/hJXLy3bF/queijo.png' }
     ];
 
     const temperosData = [
@@ -751,6 +751,7 @@
             };
             div.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
+                    ${ing.img ? `<img src="${ing.img}" referrerpolicy="no-referrer" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">` : ''}
                     <div>
                         <div style="font-weight: 700; font-size: 13px;">${ing.name}</div>
                         ${ing.extra ? `<div style="font-size: 11px; color: var(--red-primary); font-weight: 800;">${ing.extra}</div>` : ''}
