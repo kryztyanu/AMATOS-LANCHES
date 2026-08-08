@@ -117,6 +117,7 @@ html_template = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>Amatos Lanches - Cardápio Online</title>
     <meta name="description" content="Peça os melhores sanduíches, pastéis e petiscos do Amatos Lanches via WhatsApp!">
     <link rel="icon" type="image/png" href="data:image/png;base64,%%LOGO_B64%%">

@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.R
 import com.example.data.model.MenuItem
 import com.example.ui.theme.PriceRed
@@ -215,7 +217,11 @@ fun MacarraoDetailDialog(
                         ) {
                             if (itemOption.imageUrl.isNotEmpty()) {
                                 AsyncImage(
-                                    model = itemOption.imageUrl,
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .data(itemOption.imageUrl)
+                                        .setHeader("User-Agent", "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36")
+                                        .crossfade(true)
+                                        .build(),
                                     contentDescription = itemOption.name,
                                     modifier = Modifier
                                         .size(46.dp)
@@ -274,7 +280,11 @@ fun MacarraoDetailDialog(
                         ) {
                             if (itemOption.imageUrl.isNotEmpty()) {
                                 AsyncImage(
-                                    model = itemOption.imageUrl,
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .data(itemOption.imageUrl)
+                                        .setHeader("User-Agent", "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36")
+                                        .crossfade(true)
+                                        .build(),
                                     contentDescription = itemOption.name,
                                     modifier = Modifier
                                         .size(46.dp)
@@ -342,7 +352,11 @@ fun MacarraoDetailDialog(
                         ) {
                             if (itemOption.imageUrl.isNotEmpty()) {
                                 AsyncImage(
-                                    model = itemOption.imageUrl,
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .data(itemOption.imageUrl)
+                                        .setHeader("User-Agent", "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36")
+                                        .crossfade(true)
+                                        .build(),
                                     contentDescription = itemOption.name,
                                     modifier = Modifier
                                         .size(46.dp)
