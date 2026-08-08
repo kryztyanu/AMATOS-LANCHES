@@ -54,10 +54,10 @@ fun MacarraoDetailDialog(
     // Options Data
     val massas = remember {
         listOf(
-            OptionItem("parafuso", "Parafuso", "https://i.ibb.co/dwQmtPPW/image.png"),
-            OptionItem("penne", "Penne", "https://i.ibb.co/N6RK7X0K/image.png"),
-            OptionItem("talharim", "Talharim", "https://i.ibb.co/V8NxNdW/image.png"),
-            OptionItem("spaghetti", "Spaghetti", "https://i.ibb.co/PZmn35VJ/image.png")
+            OptionItem("parafuso", "Parafuso", "https://i.ibb.co/DHyQwwxm/macarrao-parafuso.png"),
+            OptionItem("penne", "Penne", "https://i.ibb.co/zTfGMp5Y/macarrao-penne.png"),
+            OptionItem("talharim", "Talharim", "https://i.ibb.co/sd0gHbyx/macarrao-talharim.png"),
+            OptionItem("spaghetti", "Spaghetti", "https://i.ibb.co/byGqgQv/macarrao-spaghetti.png")
         )
     }
 

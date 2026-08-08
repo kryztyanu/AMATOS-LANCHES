@@ -783,10 +783,10 @@ html_template = """<!DOCTYPE html>
     let macarraoQty = 1;
 
     const massasData = [
-        { name: 'Parafuso', img: 'https://i.ibb.co/dwQmtPPW/image.png' },
-        { name: 'Penne', img: 'https://i.ibb.co/N6RK7X0K/image.png' },
-        { name: 'Talharim', img: 'https://i.ibb.co/V8NxNdW/image.png' },
-        { name: 'Spaghetti', img: 'https://i.ibb.co/PZmn35VJ/image.png' }
+        { name: 'Parafuso', img: 'https://i.ibb.co/DHyQwwxm/macarrao-parafuso.png' },
+        { name: 'Penne', img: 'https://i.ibb.co/zTfGMp5Y/macarrao-penne.png' },
+        { name: 'Talharim', img: 'https://i.ibb.co/sd0gHbyx/macarrao-talharim.png' },
+        { name: 'Spaghetti', img: 'https://i.ibb.co/byGqgQv/macarrao-spaghetti.png' }
     ];
 
     const ingredientesData = [
