@@ -784,36 +784,36 @@ html_template = """<!DOCTYPE html>
     let macarraoQty = 1;
 
     const massasData = [
-        { name: 'Parafuso', img: 'https://i.ibb.co/DHyQwwxm/macarrao-parafuso.png' },
-        { name: 'Penne', img: 'https://i.ibb.co/zTfGMp5Y/macarrao-penne.png' },
-        { name: 'Talharim', img: 'https://i.ibb.co/sd0gHbyx/macarrao-talharim.png' },
-        { name: 'Spaghetti', img: 'https://i.ibb.co/byGqgQv/macarrao-spaghetti.png' }
+        { name: 'Parafuso', img: 'https://i.ibb.co/HLHNkZwj/macarrao-parafuso.png' },
+        { name: 'Penne', img: 'https://i.ibb.co/8n3kBwFc/macarrao-penne.png' },
+        { name: 'Talharim', img: 'https://i.ibb.co/cSsF4StD/macarrao-talharim.png' },
+        { name: 'Spaghetti', img: 'https://i.ibb.co/4Rqtg5Kg/macarrao-spaghetti.png' }
     ];
 
     const ingredientesData = [
-        { name: 'Camarão', extra: '+ R$ 5,00', price: 5, img: 'https://i.ibb.co/4q2QD3T/camarao.png' },
-        { name: 'Carne Moída', extra: '', price: 0, img: 'https://i.ibb.co/6crfb1Dn/carne-moida.png' },
-        { name: 'Atum', extra: '', price: 0, img: 'https://i.ibb.co/gHPhbjQ/atum.png' },
-        { name: 'Bacon', extra: '', price: 0, img: 'https://i.ibb.co/WwVnbM7/BACON.png' },
-        { name: 'Calabresa', extra: '', price: 0, img: 'https://i.ibb.co/FL8JKgK0/calabresa.png' },
-        { name: 'Presunto', extra: '', price: 0, img: 'https://i.ibb.co/4RXrXtL1/presunto.png' },
-        { name: 'Queijo Mussarella', extra: '', price: 0, img: 'https://i.ibb.co/hJXLy3bF/queijo.png' }
+        { name: 'Camarão', extra: '+ R$ 5,00', price: 5, img: 'https://i.ibb.co/bR2SRsGB/camarao.png' },
+        { name: 'Carne Moída', extra: '', price: 0, img: 'https://i.ibb.co/dsf3stm7/carne-moida.png' },
+        { name: 'Atum', extra: '', price: 0, img: 'https://i.ibb.co/6JYKnDWP/atum.png' },
+        { name: 'Bacon', extra: '', price: 0, img: 'https://i.ibb.co/sJkdzcfX/BACON.png' },
+        { name: 'Calabresa', extra: '', price: 0, img: 'https://i.ibb.co/skCDDzG/calabresa.png' },
+        { name: 'Presunto', extra: '', price: 0, img: 'https://i.ibb.co/8n1F0ZhT/presunto.png' },
+        { name: 'Queijo Mussarella', extra: '', price: 0, img: 'https://i.ibb.co/tMFy2k6Z/queijo.png' }
     ];
 
     const temperosData = [
-        { name: 'Tomate', img: 'https://i.ibb.co/SGCwrdf/tomate.png' },
-        { name: 'Cebola', img: 'https://i.ibb.co/DDTHZsBK/CEBOLA.png' },
-        { name: 'Salsa', img: 'https://i.ibb.co/CKNGQXtS/salsa.png' },
-        { name: 'Pimentão', img: 'https://i.ibb.co/jPFMdymm/pimentao.png' },
-        { name: 'Coentro', img: 'https://i.ibb.co/QFXm2Vxn/coentro.png' },
-        { name: 'Cebolinha', img: 'https://i.ibb.co/xK4Ytzrg/cebolinha.png' },
-        { name: 'Alho', img: 'https://i.ibb.co/ZRjBJYLJ/ALHO.png' },
-        { name: 'Passas', img: 'https://i.ibb.co/8nfTN8KF/PASSAS.png' },
-        { name: 'Azeitona', img: 'https://i.ibb.co/Z38tvHr/AZEITONA.png' },
-        { name: 'Ervilha', img: 'https://i.ibb.co/ZRJDbN6m/ERVILHA.png' },
-        { name: 'Milho', img: 'https://i.ibb.co/qMfXjPbL/milho.png' },
-        { name: 'Orégano', img: 'https://i.ibb.co/2Ytz5gG1/oregano.png' },
-        { name: 'Pimenta Calabresa', img: 'https://i.ibb.co/fz8J6bn0/pimenta-calabresa.png' }
+        { name: 'Tomate', img: 'https://i.ibb.co/5XPkQvNk/tomate.png' },
+        { name: 'Cebola', img: 'https://i.ibb.co/xKgDVxW2/CEBOLA.png' },
+        { name: 'Salsa', img: 'https://i.ibb.co/20Yy5LHL/salsa.png' },
+        { name: 'Pimentão', img: 'https://i.ibb.co/mCKKsWt0/pimentao.png' },
+        { name: 'Coentro', img: 'https://i.ibb.co/LVpszqy/coentro.png' },
+        { name: 'Cebolinha', img: 'https://i.ibb.co/7JHhYSCw/cebolinha.png' },
+        { name: 'Alho', img: 'https://i.ibb.co/twD6bqWw/ALHO.png' },
+        { name: 'Passas', img: 'https://i.ibb.co/1pS1mF0/PASSAS.png' },
+        { name: 'Azeitona', img: 'https://i.ibb.co/YT7GY445/AZEITONA.png' },
+        { name: 'Ervilha', img: 'https://i.ibb.co/VWX2f7sH/ERVILHA.png' },
+        { name: 'Milho', img: 'https://i.ibb.co/jvbF6qHR/milho.png' },
+        { name: 'Orégano', img: 'https://i.ibb.co/Y7hY7RJw/oregano.png' },
+        { name: 'Pimenta Calabresa', img: 'https://i.ibb.co/k65q0pY0/pimenta-calabresa.png' }
     ];
 
     const molhosData = [

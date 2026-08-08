@@ -56,40 +56,40 @@ fun MacarraoDetailDialog(
     // Options Data
     val massas = remember {
         listOf(
-            OptionItem("parafuso", "Parafuso", "https://i.ibb.co/DHyQwwxm/macarrao-parafuso.png"),
-            OptionItem("penne", "Penne", "https://i.ibb.co/zTfGMp5Y/macarrao-penne.png"),
-            OptionItem("talharim", "Talharim", "https://i.ibb.co/sd0gHbyx/macarrao-talharim.png"),
-            OptionItem("spaghetti", "Spaghetti", "https://i.ibb.co/byGqgQv/macarrao-spaghetti.png")
+            OptionItem("parafuso", "Parafuso", "https://i.ibb.co/HLHNkZwj/macarrao-parafuso.png"),
+            OptionItem("penne", "Penne", "https://i.ibb.co/8n3kBwFc/macarrao-penne.png"),
+            OptionItem("talharim", "Talharim", "https://i.ibb.co/cSsF4StD/macarrao-talharim.png"),
+            OptionItem("spaghetti", "Spaghetti", "https://i.ibb.co/4Rqtg5Kg/macarrao-spaghetti.png")
         )
     }
 
     val ingredientes = remember {
         listOf(
-            OptionItem("camarao", "Camarão", "https://i.ibb.co/4q2QD3T/camarao.png", extraPrice = 5.0, extraText = "+ R$ 5,00"),
-            OptionItem("carne_moida", "Carne Moída", "https://i.ibb.co/6crfb1Dn/carne-moida.png"),
-            OptionItem("atum", "Atum", "https://i.ibb.co/gHPhbjQ/atum.png"),
-            OptionItem("bacon", "Bacon", "https://i.ibb.co/WwVnbM7/BACON.png"),
-            OptionItem("calabresa", "Calabresa", "https://i.ibb.co/FL8JKgK0/calabresa.png"),
-            OptionItem("presunto", "Presunto", "https://i.ibb.co/4RXrXtL1/presunto.png"),
-            OptionItem("queijo", "Queijo Mussarella", "https://i.ibb.co/hJXLy3bF/queijo.png")
+            OptionItem("camarao", "Camarão", "https://i.ibb.co/bR2SRsGB/camarao.png", extraPrice = 5.0, extraText = "+ R$ 5,00"),
+            OptionItem("carne_moida", "Carne Moída", "https://i.ibb.co/dsf3stm7/carne-moida.png"),
+            OptionItem("atum", "Atum", "https://i.ibb.co/6JYKnDWP/atum.png"),
+            OptionItem("bacon", "Bacon", "https://i.ibb.co/sJkdzcfX/BACON.png"),
+            OptionItem("calabresa", "Calabresa", "https://i.ibb.co/skCDDzG/calabresa.png"),
+            OptionItem("presunto", "Presunto", "https://i.ibb.co/8n1F0ZhT/presunto.png"),
+            OptionItem("queijo", "Queijo Mussarella", "https://i.ibb.co/tMFy2k6Z/queijo.png")
         )
     }
 
     val temperos = remember {
         listOf(
-            OptionItem("tomate", "Tomate", "https://i.ibb.co/SGCwrdf/tomate.png"),
-            OptionItem("cebola", "Cebola", "https://i.ibb.co/DDTHZsBK/CEBOLA.png"),
-            OptionItem("salsa", "Salsa", "https://i.ibb.co/CKNGQXtS/salsa.png"),
-            OptionItem("pimentao", "Pimentão", "https://i.ibb.co/jPFMdymm/pimentao.png"),
-            OptionItem("coentro", "Coentro", "https://i.ibb.co/QFXm2Vxn/coentro.png"),
-            OptionItem("cebolinha", "Cebolinha", "https://i.ibb.co/xK4Ytzrg/cebolinha.png"),
-            OptionItem("alho", "Alho", "https://i.ibb.co/ZRjBJYLJ/ALHO.png"),
-            OptionItem("passas", "Passas", "https://i.ibb.co/8nfTN8KF/PASSAS.png"),
-            OptionItem("azeitona", "Azeitona", "https://i.ibb.co/Z38tvHr/AZEITONA.png"),
-            OptionItem("ervilha", "Ervilha", "https://i.ibb.co/ZRJDbN6m/ERVILHA.png"),
-            OptionItem("milho", "Milho", "https://i.ibb.co/qMfXjPbL/milho.png"),
-            OptionItem("oregano", "Orégano", "https://i.ibb.co/2Ytz5gG1/oregano.png"),
-            OptionItem("pimenta", "Pimenta Calabresa", "https://i.ibb.co/fz8J6bn0/pimenta-calabresa.png")
+            OptionItem("tomate", "Tomate", "https://i.ibb.co/5XPkQvNk/tomate.png"),
+            OptionItem("cebola", "Cebola", "https://i.ibb.co/xKgDVxW2/CEBOLA.png"),
+            OptionItem("salsa", "Salsa", "https://i.ibb.co/20Yy5LHL/salsa.png"),
+            OptionItem("pimentao", "Pimentão", "https://i.ibb.co/mCKKsWt0/pimentao.png"),
+            OptionItem("coentro", "Coentro", "https://i.ibb.co/LVpszqy/coentro.png"),
+            OptionItem("cebolinha", "Cebolinha", "https://i.ibb.co/7JHhYSCw/cebolinha.png"),
+            OptionItem("alho", "Alho", "https://i.ibb.co/twD6bqWw/ALHO.png"),
+            OptionItem("passas", "Passas", "https://i.ibb.co/1pS1mF0/PASSAS.png"),
+            OptionItem("azeitona", "Azeitona", "https://i.ibb.co/YT7GY445/AZEITONA.png"),
+            OptionItem("ervilha", "Ervilha", "https://i.ibb.co/VWX2f7sH/ERVILHA.png"),
+            OptionItem("milho", "Milho", "https://i.ibb.co/jvbF6qHR/milho.png"),
+            OptionItem("oregano", "Orégano", "https://i.ibb.co/Y7hY7RJw/oregano.png"),
+            OptionItem("pimenta", "Pimenta Calabresa", "https://i.ibb.co/k65q0pY0/pimenta-calabresa.png")
         )
     }
 
