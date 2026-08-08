@@ -686,19 +686,19 @@
     ];
 
     const temperosData = [
-        { name: 'Tomate' },
-        { name: 'Cebola' },
-        { name: 'Salsa' },
-        { name: 'Pimentão' },
-        { name: 'Coentro' },
-        { name: 'Cebolinha' },
-        { name: 'Alho' },
-        { name: 'Passas' },
-        { name: 'Azeitona' },
-        { name: 'Ervilha' },
-        { name: 'Milho' },
-        { name: 'Orégano' },
-        { name: 'Pimenta Calabresa' }
+        { name: 'Tomate', img: 'https://i.ibb.co/SGCwrdf/tomate.png' },
+        { name: 'Cebola', img: 'https://i.ibb.co/DDTHZsBK/CEBOLA.png' },
+        { name: 'Salsa', img: 'https://i.ibb.co/CKNGQXtS/salsa.png' },
+        { name: 'Pimentão', img: 'https://i.ibb.co/jPFMdymm/pimentao.png' },
+        { name: 'Coentro', img: 'https://i.ibb.co/QFXm2Vxn/coentro.png' },
+        { name: 'Cebolinha', img: 'https://i.ibb.co/xK4Ytzrg/cebolinha.png' },
+        { name: 'Alho', img: 'https://i.ibb.co/ZRjBJYLJ/ALHO.png' },
+        { name: 'Passas', img: 'https://i.ibb.co/8nfTN8KF/PASSAS.png' },
+        { name: 'Azeitona', img: 'https://i.ibb.co/Z38tvHr/AZEITONA.png' },
+        { name: 'Ervilha', img: 'https://i.ibb.co/ZRJDbN6m/ERVILHA.png' },
+        { name: 'Milho', img: 'https://i.ibb.co/qMfXjPbL/milho.png' },
+        { name: 'Orégano', img: 'https://i.ibb.co/2Ytz5gG1/oregano.png' },
+        { name: 'Pimenta Calabresa', img: 'https://i.ibb.co/fz8J6bn0/pimenta-calabresa.png' }
     ];
 
     const molhosData = [
@@ -776,6 +776,7 @@
             };
             div.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
+                    ${t.img ? `<img src="${t.img}" referrerpolicy="no-referrer" style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px;">` : ''}
                     <span style="font-weight: 700; font-size: 13px;">${t.name}</span>
                 </div>
                 <input type="checkbox" ${isChecked ? 'checked' : ''}>

@@ -75,19 +75,19 @@ fun MacarraoDetailDialog(
 
     val temperos = remember {
         listOf(
-            OptionItem("tomate", "Tomate"),
-            OptionItem("cebola", "Cebola"),
-            OptionItem("salsa", "Salsa"),
-            OptionItem("pimentao", "Pimentão"),
-            OptionItem("coentro", "Coentro"),
-            OptionItem("cebolinha", "Cebolinha"),
-            OptionItem("alho", "Alho"),
-            OptionItem("passas", "Passas"),
-            OptionItem("azeitona", "Azeitona"),
-            OptionItem("ervilha", "Ervilha"),
-            OptionItem("milho", "Milho"),
-            OptionItem("oregano", "Orégano"),
-            OptionItem("pimenta", "Pimenta Calabresa")
+            OptionItem("tomate", "Tomate", "https://i.ibb.co/SGCwrdf/tomate.png"),
+            OptionItem("cebola", "Cebola", "https://i.ibb.co/DDTHZsBK/CEBOLA.png"),
+            OptionItem("salsa", "Salsa", "https://i.ibb.co/CKNGQXtS/salsa.png"),
+            OptionItem("pimentao", "Pimentão", "https://i.ibb.co/jPFMdymm/pimentao.png"),
+            OptionItem("coentro", "Coentro", "https://i.ibb.co/QFXm2Vxn/coentro.png"),
+            OptionItem("cebolinha", "Cebolinha", "https://i.ibb.co/xK4Ytzrg/cebolinha.png"),
+            OptionItem("alho", "Alho", "https://i.ibb.co/ZRjBJYLJ/ALHO.png"),
+            OptionItem("passas", "Passas", "https://i.ibb.co/8nfTN8KF/PASSAS.png"),
+            OptionItem("azeitona", "Azeitona", "https://i.ibb.co/Z38tvHr/AZEITONA.png"),
+            OptionItem("ervilha", "Ervilha", "https://i.ibb.co/ZRJDbN6m/ERVILHA.png"),
+            OptionItem("milho", "Milho", "https://i.ibb.co/qMfXjPbL/milho.png"),
+            OptionItem("oregano", "Orégano", "https://i.ibb.co/2Ytz5gG1/oregano.png"),
+            OptionItem("pimenta", "Pimenta Calabresa", "https://i.ibb.co/fz8J6bn0/pimenta-calabresa.png")
         )
     }
 
@@ -337,9 +337,20 @@ fun MacarraoDetailDialog(
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .clickable { selectedTemperos[itemOption.name] = !isChecked }
-                                .padding(12.dp),
+                                .padding(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
+                            if (itemOption.imageUrl.isNotEmpty()) {
+                                AsyncImage(
+                                    model = itemOption.imageUrl,
+                                    contentDescription = itemOption.name,
+                                    modifier = Modifier
+                                        .size(46.dp)
+                                        .clip(RoundedCornerShape(8.dp)),
+                                    contentScale = ContentScale.Crop
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                            }
                             Text(
                                 text = itemOption.name,
                                 fontSize = 14.sp,
