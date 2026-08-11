@@ -109,7 +109,11 @@ macarrao = [
     {"id": "macarrao_1", "name": "Macarrão Ao Vivo", "category": "MACARRÃO AO VIVO", "description": "Monte o seu macarrão ao vivo escolhendo tipo de massa, ingredientes, temperos e molho!", "price": 30.0, "priceText": "A partir de R$ 30,00", "isPopular": True}
 ]
 
-all_items = sandwiches + pastels + snacks + macarrao
+pizzas = [
+    {"id": "pizza_1", "name": "Pizza Grande", "category": "PIZZA", "description": "8 Fatias | 2 Sabores | Acompanha refrigerante de 1 LITRO GRÁTIS!", "price": 40.0, "priceText": "R$ 40,00", "isPopular": True}
+]
+
+all_items = sandwiches + pastels + snacks + macarrao + pizzas
 items_json = json.dumps(all_items, ensure_ascii=False)
 
 html_template = """<!DOCTYPE html>
@@ -535,6 +539,7 @@ html_template = """<!DOCTYPE html>
             <button class="tab-btn" onclick="switchCategory('PASTÉIS', this)">PASTÉIS</button>
             <button class="tab-btn" onclick="switchCategory('PETISCOS', this)">PETISCOS</button>
             <button class="tab-btn" onclick="switchCategory('MACARRÃO AO VIVO', this)">MACARRÃO AO VIVO</button>
+            <button class="tab-btn" onclick="switchCategory('PIZZA', this)">PIZZA</button>
         </div>
     </header>
 
@@ -627,6 +632,48 @@ html_template = """<!DOCTYPE html>
             </div>
             <button class="add-btn" style="padding: 12px 20px; font-size: 14px;" onclick="confirmAddMacarrao()">
                 <span id="macarraoBtnText">ADICIONAR • R$ 30,00</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Pizza Modal -->
+<div class="modal-overlay" id="pizzaModal">
+    <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+        <div class="modal-header">
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--text-dark);">PIZZA</h3>
+            <button class="close-btn" onclick="closeModal('pizzaModal')">&times;</button>
+        </div>
+
+        <div style="background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 13px; font-weight: 700; color: #5D2C00;">
+            🍕 R$ 40,00 (8 Fatias | 2 Sabores | Acompanha refrigerante de 1 LITRO GRÁTIS!)
+        </div>
+
+        <!-- Section 1: SABOR 1 -->
+        <div style="margin-bottom: 16px;">
+            <div style="font-weight: 800; font-size: 14px; color: var(--red-primary); margin-bottom: 6px;">ESCOLHA O SABOR 1:</div>
+            <div id="pizzaSabor1List"></div>
+        </div>
+
+        <!-- Section 2: SABOR 2 -->
+        <div style="margin-bottom: 16px;">
+            <div style="font-weight: 800; font-size: 14px; color: var(--red-primary); margin-bottom: 6px;">ESCOLHA O SABOR 2:</div>
+            <div id="pizzaSabor2List"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Observações:</label>
+            <input type="text" id="pizzaObs" class="form-input" placeholder="Ex: Refrigerante Guaraná, sem cebola...">
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px; border: 1px solid #DDD; border-radius: 20px; padding: 2px 8px;">
+                <button class="qty-btn" onclick="changePizzaQty(-1)">-</button>
+                <span id="pizzaQtyText" style="font-weight: 800; font-size: 15px;">1</span>
+                <button class="qty-btn" onclick="changePizzaQty(1)">+</button>
+            </div>
+            <button class="add-btn" style="padding: 12px 20px; font-size: 14px;" onclick="confirmAddPizza()">
+                <span id="pizzaBtnText">ADICIONAR • R$ 40,00</span>
             </button>
         </div>
     </div>
@@ -956,9 +1003,101 @@ html_template = """<!DOCTYPE html>
         closeModal('macarraoModal');
     }
 
+    const pizzaSaboresData = [
+        'Calabresa Acebolada',
+        'Calabresa com Presunto',
+        'Frango com Requeijão',
+        'Frango com Catupiry',
+        'Frango com Cheddar',
+        'Frango com Milho',
+        'Frango com Batata Palha',
+        'Portuguesa Original',
+        'Bacon',
+        'Queijo',
+        'Mista',
+        'Romeu e Julieta'
+    ];
+
+    let pizzaSabor1 = pizzaSaboresData[0];
+    let pizzaSabor2 = pizzaSaboresData[0];
+    let pizzaQty = 1;
+
+    function openPizzaModal() {
+        pizzaSabor1 = pizzaSaboresData[0];
+        pizzaSabor2 = pizzaSaboresData[0];
+        pizzaQty = 1;
+        document.getElementById('pizzaObs').value = '';
+        renderPizzaModal();
+        document.getElementById('pizzaModal').classList.add('active');
+    }
+
+    function renderPizzaModal() {
+        const list1 = document.getElementById('pizzaSabor1List');
+        list1.innerHTML = '';
+        pizzaSaboresData.forEach(sab => {
+            const isSel = (pizzaSabor1 === sab);
+            const div = document.createElement('div');
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 10px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isSel ? 'var(--red-primary)' : '#EEE'}; background: ${isSel ? '#FFF0F0' : '#FFF'};`;
+            div.onclick = () => { pizzaSabor1 = sab; renderPizzaModal(); };
+            div.innerHTML = `
+                <span style="font-weight: ${isSel ? '800' : '600'}; font-size: 13px; color: ${isSel ? 'var(--red-primary)' : '#212121'};">${sab}</span>
+                <input type="radio" name="pizza_sabor_1" ${isSel ? 'checked' : ''}>
+            `;
+            list1.appendChild(div);
+        });
+
+        const list2 = document.getElementById('pizzaSabor2List');
+        list2.innerHTML = '';
+        pizzaSaboresData.forEach(sab => {
+            const isSel = (pizzaSabor2 === sab);
+            const div = document.createElement('div');
+            div.style.cssText = `display: flex; align-items: center; justify-content: space-between; padding: 10px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1px solid ${isSel ? 'var(--red-primary)' : '#EEE'}; background: ${isSel ? '#FFF0F0' : '#FFF'};`;
+            div.onclick = () => { pizzaSabor2 = sab; renderPizzaModal(); };
+            div.innerHTML = `
+                <span style="font-weight: ${isSel ? '800' : '600'}; font-size: 13px; color: ${isSel ? 'var(--red-primary)' : '#212121'};">${sab}</span>
+                <input type="radio" name="pizza_sabor_2" ${isSel ? 'checked' : ''}>
+            `;
+            list2.appendChild(div);
+        });
+
+        const totalPrice = 40.0 * pizzaQty;
+        document.getElementById('pizzaQtyText').innerText = pizzaQty;
+        document.getElementById('pizzaBtnText').innerText = `ADICIONAR • R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+    }
+
+    function changePizzaQty(delta) {
+        pizzaQty = Math.max(1, pizzaQty + delta);
+        renderPizzaModal();
+    }
+
+    function confirmAddPizza() {
+        const unitPrice = 40.0;
+        const details = `Sabor 1: ${pizzaSabor1} | Sabor 2: ${pizzaSabor2}`;
+        const obs = document.getElementById('pizzaObs').value.trim();
+
+        for (let q = 0; q < pizzaQty; q++) {
+            cart.push({
+                id: 'pizza_' + Date.now() + '_' + q,
+                name: 'Pizza Grande',
+                price: unitPrice,
+                priceText: 'R$ 40,00',
+                selectedOption: details,
+                observation: obs,
+                quantity: 1
+            });
+        }
+        saveCart();
+        closeModal('pizzaModal');
+    }
+
     function openItemModal(id) {
         const item = menuData.find(i => i.id === id);
         if (!item) return;
+
+        if (id === 'pizza_1' || item.category === 'PIZZA') {
+            openPizzaModal();
+            return;
+        }
 
         if (id === 'macarrao_1' || item.category === 'MACARRÃO AO VIVO') {
             openMacarraoModal();

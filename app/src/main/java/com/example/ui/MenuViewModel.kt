@@ -21,7 +21,8 @@ enum class MenuTab {
     SANDUICHES,
     PASTEIS,
     PETISCOS,
-    MACARRAO
+    MACARRAO,
+    PIZZA
 }
 
 data class MenuUiState(
@@ -226,6 +227,7 @@ class MenuViewModel(private val repository: MenuRepository) : ViewModel() {
             MenuTab.PASTEIS -> repository.pasteis
             MenuTab.PETISCOS -> repository.petiscos
             MenuTab.MACARRAO -> repository.macarrao
+            MenuTab.PIZZA -> repository.pizza
         }
     }
 }

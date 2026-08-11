@@ -120,6 +120,7 @@ fun AmatosApp(viewModel: MenuViewModel) {
                     MenuTab.PASTEIS -> "PASTÉIS"
                     MenuTab.PETISCOS -> "PETISCOS"
                     MenuTab.MACARRAO -> "MACARRÃO AO VIVO"
+                    MenuTab.PIZZA -> "PIZZA"
                 }
             }
 
@@ -175,7 +176,15 @@ fun AmatosApp(viewModel: MenuViewModel) {
 
     // Detail Dialog
     uiState.selectedItemDetail?.let { item ->
-        if (item.category == "MACARRÃO AO VIVO" || item.id == "macarrao_1") {
+        if (item.category == "PIZZA" || item.id == "pizza_1") {
+            PizzaDetailDialog(
+                item = item,
+                onDismiss = { viewModel.closeItemDetail() },
+                onAddToCartCustom = { customItem, selectedOption, obs, qty ->
+                    viewModel.addToCart(customItem, selectedOption, obs, qty)
+                }
+            )
+        } else if (item.category == "MACARRÃO AO VIVO" || item.id == "macarrao_1") {
             MacarraoDetailDialog(
                 item = item,
                 onDismiss = { viewModel.closeItemDetail() },

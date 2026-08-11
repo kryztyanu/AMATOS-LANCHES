@@ -32,7 +32,8 @@ fun CategoryTabs(
         MenuTab.SANDUICHES to "SANDUÍCHES",
         MenuTab.PASTEIS to "PASTÉIS",
         MenuTab.PETISCOS to "PETISCOS",
-        MenuTab.MACARRAO to "MACARRÃO AO VIVO"
+        MenuTab.MACARRAO to "MACARRÃO AO VIVO",
+        MenuTab.PIZZA to "PIZZA"
     )
 
     Row(

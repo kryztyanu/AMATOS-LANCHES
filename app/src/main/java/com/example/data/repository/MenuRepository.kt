@@ -65,8 +65,20 @@ class MenuRepository(
     }
 
     fun getAllMenuItems(): List<MenuItem> {
-        return sanduiches + pasteis + petiscos + macarrao
+        return sanduiches + pasteis + petiscos + macarrao + pizza
     }
+
+    val pizza = listOf(
+        MenuItem(
+            id = "pizza_1",
+            name = "Pizza Grande",
+            category = "PIZZA",
+            description = "8 Fatias | 2 Sabores | Acompanha refrigerante de 1 LITRO GRÁTIS!",
+            price = 40.0,
+            priceText = "R$ 40,00",
+            isPopular = true
+        )
+    )
 
     val macarrao = listOf(
         MenuItem(
