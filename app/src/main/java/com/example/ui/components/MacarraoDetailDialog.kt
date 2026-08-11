@@ -146,7 +146,7 @@ fun MacarraoDetailDialog(
                         Spacer(modifier = Modifier.width(8.dp))
                         Column {
                             Text(
-                                text = "MACARRÃO AO VIVO",
+                                text = "MASSA",
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color(0xFF1C1B1B)

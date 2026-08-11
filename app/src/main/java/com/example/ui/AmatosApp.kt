@@ -119,7 +119,7 @@ fun AmatosApp(viewModel: MenuViewModel) {
                     MenuTab.SANDUICHES -> "SANDUÍCHES"
                     MenuTab.PASTEIS -> "PASTÉIS"
                     MenuTab.PETISCOS -> "PETISCOS"
-                    MenuTab.MACARRAO -> "MACARRÃO AO VIVO"
+                    MenuTab.MACARRAO -> "MASSA"
                     MenuTab.PIZZA -> "PIZZA"
                 }
             }
@@ -184,7 +184,7 @@ fun AmatosApp(viewModel: MenuViewModel) {
                     viewModel.addToCart(customItem, selectedOption, obs, qty)
                 }
             )
-        } else if (item.category == "MACARRÃO AO VIVO" || item.id == "macarrao_1") {
+        } else if (item.category == "MASSA" || item.category == "MACARRÃO AO VIVO" || item.id == "macarrao_1") {
             MacarraoDetailDialog(
                 item = item,
                 onDismiss = { viewModel.closeItemDetail() },

@@ -73,7 +73,7 @@ class MenuRepository(
             id = "pizza_1",
             name = "Pizza Grande",
             category = "PIZZA",
-            description = "8 Fatias | 2 Sabores | Acompanha refrigerante de 1 LITRO GRÁTIS!",
+            description = "8 Fatias | 2 Sabores",
             price = 40.0,
             priceText = "R$ 40,00",
             isPopular = true
@@ -83,9 +83,9 @@ class MenuRepository(
     val macarrao = listOf(
         MenuItem(
             id = "macarrao_1",
-            name = "Macarrão Ao Vivo",
-            category = "MACARRÃO AO VIVO",
-            description = "Monte o seu macarrão ao vivo escolhendo tipo de massa, ingredientes, temperos e molho!",
+            name = "Massa Monte Você Mesmo",
+            category = "MASSA",
+            description = "Monte a sua massa ao vivo escolhendo tipo de massa, ingredientes, temperos e molho!",
             price = 30.0,
             priceText = "A partir de R$ 30,00",
             isPopular = true

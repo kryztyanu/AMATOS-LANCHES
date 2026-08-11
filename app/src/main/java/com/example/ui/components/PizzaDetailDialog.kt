@@ -152,7 +152,7 @@ fun PizzaDetailDialog(
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Text(
-                            text = "R$ 40,00 (8 Fatias | 2 Sabores | Acompanha refrigerante de 1 LITRO GRÁTIS!)",
+                            text = "R$ 40,00 (8 Fatias | 2 Sabores)",
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFF5D2C00)

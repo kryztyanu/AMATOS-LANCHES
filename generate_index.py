@@ -106,11 +106,11 @@ snacks = [
 ]
 
 macarrao = [
-    {"id": "macarrao_1", "name": "Macarrão Ao Vivo", "category": "MACARRÃO AO VIVO", "description": "Monte o seu macarrão ao vivo escolhendo tipo de massa, ingredientes, temperos e molho!", "price": 30.0, "priceText": "A partir de R$ 30,00", "isPopular": True}
+    {"id": "macarrao_1", "name": "Massa Monte Você Mesmo", "category": "MASSA", "description": "Monte a sua massa ao vivo escolhendo tipo de massa, ingredientes, temperos e molho!", "price": 30.0, "priceText": "A partir de R$ 30,00", "isPopular": True}
 ]
 
 pizzas = [
-    {"id": "pizza_1", "name": "Pizza Grande", "category": "PIZZA", "description": "8 Fatias | 2 Sabores | Acompanha refrigerante de 1 LITRO GRÁTIS!", "price": 40.0, "priceText": "R$ 40,00", "isPopular": True}
+    {"id": "pizza_1", "name": "Pizza Grande", "category": "PIZZA", "description": "8 Fatias | 2 Sabores", "price": 40.0, "priceText": "R$ 40,00", "isPopular": True}
 ]
 
 all_items = sandwiches + pastels + snacks + macarrao + pizzas
@@ -538,7 +538,7 @@ html_template = """<!DOCTYPE html>
             <button class="tab-btn active" onclick="switchCategory('SANDUÍCHES', this)">SANDUÍCHES</button>
             <button class="tab-btn" onclick="switchCategory('PASTÉIS', this)">PASTÉIS</button>
             <button class="tab-btn" onclick="switchCategory('PETISCOS', this)">PETISCOS</button>
-            <button class="tab-btn" onclick="switchCategory('MACARRÃO AO VIVO', this)">MACARRÃO AO VIVO</button>
+            <button class="tab-btn" onclick="switchCategory('MASSA', this)">MASSA</button>
             <button class="tab-btn" onclick="switchCategory('PIZZA', this)">PIZZA</button>
         </div>
     </header>
@@ -585,7 +585,7 @@ html_template = """<!DOCTYPE html>
     <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
         <div class="modal-header">
             <div>
-                <h3 style="font-size: 18px; font-weight: 800;">MACARRÃO AO VIVO</h3>
+                <h3 style="font-size: 18px; font-weight: 800;">MASSA</h3>
                 <span style="font-size: 13px; font-weight: 700; color: var(--red-primary);">A partir de R$ 30,00</span>
             </div>
             <button class="close-btn" onclick="closeModal('macarraoModal')">&times;</button>
@@ -646,7 +646,7 @@ html_template = """<!DOCTYPE html>
         </div>
 
         <div style="background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 13px; font-weight: 700; color: #5D2C00;">
-            🍕 R$ 40,00 (8 Fatias | 2 Sabores | Acompanha refrigerante de 1 LITRO GRÁTIS!)
+            🍕 R$ 40,00 (8 Fatias | 2 Sabores)
         </div>
 
         <!-- Section 1: SABOR 1 -->
@@ -1099,7 +1099,7 @@ html_template = """<!DOCTYPE html>
             return;
         }
 
-        if (id === 'macarrao_1' || item.category === 'MACARRÃO AO VIVO') {
+        if (id === 'macarrao_1' || item.category === 'MASSA' || item.category === 'MACARRÃO AO VIVO') {
             openMacarraoModal();
             return;
         }
