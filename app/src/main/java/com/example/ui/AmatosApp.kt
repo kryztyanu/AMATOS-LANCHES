@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingBag
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,8 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui.components.*
 import com.example.ui.theme.PriceRed
@@ -47,50 +50,7 @@ fun AmatosApp(viewModel: MenuViewModel) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFFFCF9F8),
-        floatingActionButton = {
-            if (cartCount > 0) {
-                ExtendedFloatingActionButton(
-                    onClick = { viewModel.toggleCart(true) },
-                    containerColor = RedPrimary,
-                    contentColor = Color.White,
-                    shape = RoundedCornerShape(28.dp),
-                    elevation = FloatingActionButtonDefaults.elevation(6.dp),
-                    modifier = Modifier.padding(bottom = 12.dp)
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        BadgedBox(
-                            badge = {
-                                Badge(
-                                    containerColor = Color(0xFFFFE29A),
-                                    contentColor = Color(0xFF5D2C00)
-                                ) {
-                                    Text(
-                                        text = "$cartCount",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 11.sp
-                                    )
-                                }
-                            }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.ShoppingBag,
-                                contentDescription = "Carrinho",
-                                modifier = Modifier.size(22.dp)
-                            )
-                        }
-
-                        Text(
-                            text = "Ver Pedido • ${ptBrFormat.format(totalCartPrice)}",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp
-                        )
-                    }
-                }
-            }
-        }
+        floatingActionButton = {}
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -100,13 +60,13 @@ fun AmatosApp(viewModel: MenuViewModel) {
             // Header with title, mascot logo, yellow delivery banner, and search input (Fixed at top)
             AmatosHeader(
                 searchQuery = uiState.searchQuery,
-                onSearchQueryChange = { viewModel.setSearchQuery(it) }
+                onSearchQueryChange = { }
             )
 
             // Category Pills Tab Row (SANDUÍCHES, PASTÉIS, PETISCOS) (Fixed at top)
             CategoryTabs(
                 selectedTab = uiState.activeTab,
-                onTabSelected = { viewModel.selectTab(it) }
+                onTabSelected = { }
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -164,9 +124,9 @@ fun AmatosApp(viewModel: MenuViewModel) {
                         MenuItemCard(
                             item = item,
                             isFavorite = isFav,
-                            onFavoriteToggle = { viewModel.toggleFavorite(item.id) },
-                            onAddToCart = { viewModel.openItemDetail(item) },
-                            onCardClick = { viewModel.openItemDetail(item) }
+                            onFavoriteToggle = { },
+                            onAddToCart = { },
+                            onCardClick = { }
                         )
                     }
                 }
@@ -174,55 +134,63 @@ fun AmatosApp(viewModel: MenuViewModel) {
         }
     }
 
-    // Detail Dialog
-    uiState.selectedItemDetail?.let { item ->
-        if (item.category == "PIZZA" || item.id == "pizza_1") {
-            PizzaDetailDialog(
-                item = item,
-                onDismiss = { viewModel.closeItemDetail() },
-                onAddToCartCustom = { customItem, selectedOption, obs, qty ->
-                    viewModel.addToCart(customItem, selectedOption, obs, qty)
+    // Modal de Alerta: Aplicativo inoperante
+    AlertDialog(
+        onDismissRequest = { /* Bloqueado / Inoperante */ },
+        icon = {
+            Surface(
+                shape = CircleShape,
+                color = Color(0xFFFFEBEE),
+                modifier = Modifier.size(64.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = Icons.Default.Warning,
+                        contentDescription = "Alerta",
+                        tint = Color(0xFFD32F2F),
+                        modifier = Modifier.size(36.dp)
+                    )
                 }
+            }
+        },
+        title = {
+            Text(
+                text = "Aviso",
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 20.sp,
+                color = Color(0xFF1C1B1B),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
-        } else if (item.category == "MASSA" || item.category == "MACARRÃO AO VIVO" || item.id == "macarrao_1") {
-            MacarraoDetailDialog(
-                item = item,
-                onDismiss = { viewModel.closeItemDetail() },
-                onAddToCartCustom = { customItem, selectedOption, obs, qty, _ ->
-                    viewModel.addToCart(customItem, selectedOption, obs, qty)
-                }
-            )
-        } else {
-            ItemDetailDialog(
-                item = item,
-                onDismiss = { viewModel.closeItemDetail() },
-                onAddToCart = { option, obs, qty ->
-                    viewModel.addToCart(item, option, obs, qty)
-                }
-            )
-        }
-    }
-
-    // Cart Bottom Sheet
-    if (uiState.isCartOpen) {
-        CartBottomSheet(
-            cartItems = cartItems,
-            totalPrice = totalCartPrice,
-            customerName = uiState.customerName,
-            onCustomerNameChange = { viewModel.setCustomerName(it) },
-            deliveryAddress = uiState.deliveryAddress,
-            onDeliveryAddressChange = { viewModel.setDeliveryAddress(it) },
-            referencePoint = uiState.referencePoint,
-            onReferencePointChange = { viewModel.setReferencePoint(it) },
-            orderObservation = uiState.orderObservation,
-            onOrderObservationChange = { viewModel.setOrderObservation(it) },
-            paymentMethod = uiState.paymentMethod,
-            onPaymentMethodChange = { viewModel.setPaymentMethod(it) },
-            onUpdateQuantity = { item, qty -> viewModel.updateCartQuantity(item, qty) },
-            onRemoveItem = { item -> viewModel.removeFromCart(item) },
-            onClearCart = { viewModel.clearCart() },
-            onSendOrder = { viewModel.sendOrderViaWhatsApp(context) },
-            onDismiss = { viewModel.toggleCart(false) }
-        )
-    }
+        },
+        text = {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Aplicativo inoperante, favor entrar em contato como desenvolvedor",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    color = Color(0xFFD32F2F)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Todas as funcionalidades deste aplicativo foram temporariamente suspensas.",
+                    fontSize = 13.sp,
+                    color = Color(0xFF666666),
+                    textAlign = TextAlign.Center
+                )
+            }
+        },
+        confirmButton = {},
+        dismissButton = {},
+        properties = DialogProperties(
+            dismissOnBackPress = false,
+            dismissOnClickOutside = false
+        ),
+        containerColor = Color.White,
+        shape = RoundedCornerShape(20.dp)
+    )
 }

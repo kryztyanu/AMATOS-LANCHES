@@ -517,9 +517,106 @@ html_template = """<!DOCTYPE html>
             padding: 40px 20px;
             color: var(--text-muted);
         }
+
+        /* Inoperante Alert Overlay & Box */
+        .alert-screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 99999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .alert-box-container {
+            background: #ffffff;
+            border-radius: 24px;
+            max-width: 440px;
+            width: 100%;
+            padding: 36px 28px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            border-top: 6px solid #D32F2F;
+            animation: alertPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-sizing: border-box;
+        }
+
+        @keyframes alertPopIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .alert-box-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #FFEBEE;
+            color: #D32F2F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            box-shadow: 0 8px 18px rgba(211, 47, 47, 0.2);
+        }
+
+        .alert-box-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1C1B1B;
+            margin-bottom: 14px;
+        }
+
+        .alert-box-message {
+            font-size: 16px;
+            font-weight: 700;
+            color: #C62828;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            padding: 14px;
+            background: #FFF5F5;
+            border-radius: 12px;
+            border: 1px solid #FFCDD2;
+        }
+
+        .alert-box-sub {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Desativação completa do app */
+        .app-container {
+            pointer-events: none !important;
+            user-select: none !important;
+            filter: grayscale(40%) blur(1px);
+        }
     </style>
 </head>
-<body>
+<body style="overflow: hidden;">
+
+<!-- Tela de Alerta / Caixa de Alerta Bloqueante -->
+<div class="alert-screen-overlay" id="inoperativeAlertOverlay" onclick="triggerAlertNotice()">
+    <div class="alert-box-container" role="alertdialog" aria-modal="true" onclick="event.stopPropagation()">
+        <div class="alert-box-icon">⚠️</div>
+        <div class="alert-box-title">Aviso</div>
+        <div class="alert-box-message">
+            Aplicativo inoperante, favor entrar em contato como desenvolvedor
+        </div>
+        <p class="alert-box-sub">
+            Todas as funcionalidades e pedidos deste aplicativo foram temporariamente desativadas.
+        </p>
+    </div>
+</div>
 
 <div class="app-container">
     <header>
@@ -745,23 +842,24 @@ html_template = """<!DOCTYPE html>
     let cart = JSON.parse(localStorage.getItem('amatos_cart') || '[]');
     let activeModalItem = null;
 
+    function triggerAlertNotice() {
+        alert("Aplicativo inoperante, favor entrar em contato como desenvolvedor");
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('custName').value = localStorage.getItem('amatos_name') || '';
-        document.getElementById('custAddress').value = localStorage.getItem('amatos_address') || '';
-        document.getElementById('custReference').value = localStorage.getItem('amatos_ref') || '';
-        renderMenu();
-        updateCartBar();
+        setTimeout(() => {
+            triggerAlertNotice();
+        }, 200);
     });
 
     function switchCategory(cat, btn) {
-        currentCategory = cat;
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        if (btn) btn.classList.add('active');
-        renderMenu();
+        triggerAlertNotice();
+        return false;
     }
 
     function filterMenu() {
-        renderMenu();
+        triggerAlertNotice();
+        return false;
     }
 
     function renderMenu() {
@@ -870,14 +968,8 @@ html_template = """<!DOCTYPE html>
     ];
 
     function openMacarraoModal() {
-        macarraoMassa = 'Parafuso';
-        macarraoIngredientes = [];
-        macarraoTemperos = [];
-        macarraoMolho = 'Branco';
-        macarraoQty = 1;
-        document.getElementById('macarraoObs').value = '';
-        renderMacarraoModal();
-        document.getElementById('macarraoModal').classList.add('active');
+        triggerAlertNotice();
+        return;
     }
 
     function renderMacarraoModal() {
@@ -1023,12 +1115,8 @@ html_template = """<!DOCTYPE html>
     let pizzaQty = 1;
 
     function openPizzaModal() {
-        pizzaSabor1 = pizzaSaboresData[0];
-        pizzaSabor2 = pizzaSaboresData[0];
-        pizzaQty = 1;
-        document.getElementById('pizzaObs').value = '';
-        renderPizzaModal();
-        document.getElementById('pizzaModal').classList.add('active');
+        triggerAlertNotice();
+        return;
     }
 
     function renderPizzaModal() {
@@ -1091,41 +1179,8 @@ html_template = """<!DOCTYPE html>
     }
 
     function openItemModal(id) {
-        const item = menuData.find(i => i.id === id);
-        if (!item) return;
-
-        if (id === 'pizza_1' || item.category === 'PIZZA') {
-            openPizzaModal();
-            return;
-        }
-
-        if (id === 'macarrao_1' || item.category === 'MASSA' || item.category === 'MACARRÃO AO VIVO') {
-            openMacarraoModal();
-            return;
-        }
-
-        if (!item.options || item.options.length === 0) {
-            addToCart(item, '', '');
-            return;
-        }
-
-        activeModalItem = item;
-        document.getElementById('modalItemTitle').innerText = item.name;
-        document.getElementById('modalItemDesc').innerText = item.description;
-
-        const optGroup = document.getElementById('optionGroup');
-        const optSelect = document.getElementById('modalOptionSelect');
-        optSelect.innerHTML = '';
-        item.options.forEach(opt => {
-            const o = document.createElement('option');
-            o.value = opt;
-            o.innerText = opt;
-            optSelect.appendChild(o);
-        });
-        optGroup.style.display = 'block';
-
-        document.getElementById('modalObservation').value = '';
-        document.getElementById('itemModal').classList.add('active');
+        triggerAlertNotice();
+        return;
     }
 
     function confirmAddItem() {
@@ -1187,34 +1242,8 @@ html_template = """<!DOCTYPE html>
     }
 
     function openCartModal() {
-        const container = document.getElementById('cartItemsContainer');
-        container.innerHTML = '';
-
-        if (cart.length === 0) {
-            container.innerHTML = '<div class="empty-state">Sua sacola está vazia.</div>';
-        } else {
-            cart.forEach(item => {
-                const div = document.createElement('div');
-                div.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #F0F0F0;';
-                div.innerHTML = `
-                    <div>
-                        <div style="font-weight: 700;">${item.name} ${item.selectedOption ? `(${item.selectedOption})` : ''}</div>
-                        <div style="font-size: 12px; color: #666;">${item.priceText}</div>
-                        ${item.observation ? `<div style="font-size: 11px; color: var(--red-primary);">Obs: ${item.observation}</div>` : ''}
-                    </div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="changeQtyCart('${item.id}', '${item.selectedOption}', -1)">-</button>
-                        <span class="qty-num">${item.quantity}</span>
-                        <button class="qty-btn" onclick="changeQtyCart('${item.id}', '${item.selectedOption}', 1)">+</button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        const totalPrice = cart.reduce((acc, c) => acc + (c.price * c.quantity), 0);
-        document.getElementById('cartModalTotal').innerText = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
-        document.getElementById('cartModal').classList.add('active');
+        triggerAlertNotice();
+        return;
     }
 
     function changeQtyCart(id, option, delta) {
